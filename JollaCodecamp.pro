@@ -18,5 +18,7 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     qml/pages/SecondPage.qml \
     rpm/JollaCodecamp.spec \
     rpm/JollaCodecamp.yaml \
-    JollaCodecamp.desktop
+    JollaCodecamp.desktop \
+    qml/img/barclays_logo.jpg \
+    qml/img/barclays_teams_logos.jpg
 

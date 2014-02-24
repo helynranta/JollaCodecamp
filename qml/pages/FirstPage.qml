@@ -31,8 +31,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-
 Page {
+
     id: page
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -60,9 +60,18 @@ Page {
             PageHeader {
                 title: "UI Template"
             }
+            Image
+            {
+                id : barclays_logo
+                source : "../img/barclays_logo.jpg"
+                width: 130; height: 100
+                fillMode: Image.PreserveAspectFit
+
+            }
+
             Label {
                 x: Theme.paddingLarge
-                text: "Hello Sailors"
+                text: soccer.text
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraLarge
             }

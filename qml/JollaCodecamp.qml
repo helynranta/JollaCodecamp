@@ -34,6 +34,30 @@ import "pages"
 
 ApplicationWindow
 {
+    ListModel
+    {
+        id : soccer
+        property string text: "loading"
+
+        signal loadCompleted()
+
+        Component.onCompleted:
+        {
+            text = "does it even work ffs";
+            var xhr = new XMLHttpRequest;
+            xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/E1.csv", true);
+            xhr.send();
+            xhr.onreadystatechange = function()
+            {
+                text = "gibestive text";
+                if(xhr.readyState == XMLHttpRequest.DONE)
+                {
+                    text = xhr.responseText;
+                }
+            }
+        }
+    }
+
     initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
