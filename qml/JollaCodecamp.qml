@@ -61,7 +61,8 @@ ApplicationWindow
                     console.log(matches[i])
                     var chunks = matches[i].split('|')
                     for(var n=0; n<chunks.length; n++){
-                        if(chunks[n].indexOf('=') > -1){
+                        if(chunks[n].indexOf('=') > -1)
+                        {
                             var tmp = chunks[n].split('=', 2)
                             var k = tmp[0].trim()
                             var v = tmp[1].trim()
