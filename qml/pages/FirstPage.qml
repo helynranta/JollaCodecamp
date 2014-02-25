@@ -60,20 +60,28 @@ Page {
             PageHeader {
                 title: "UI Template"
             }
-            Image
+            Item
             {
                 id : barclays_logo
-                source : "../img/barclays_logo.jpg"
-                width: 130; height: 100
-                fillMode: Image.PreserveAspectFit
-
+                SpriteSequence
+                {
+                    Sprite
+                    {
+                        source: "../img/barclays_teams_logos.jpg"
+                        frameX: 0
+                        frameY: 0
+                        frameWidth: 256
+                        frameHeight: 256
+                        to: {"still":1}
+                    }
+                }
             }
 
             Label {
                 x: Theme.paddingLarge
-                text: soccer.text
+                text: teamModel.text;
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
+                font.pixelSize: Theme.fontSizeMedium
             }
         }
     }
