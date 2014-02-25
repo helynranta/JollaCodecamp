@@ -44,9 +44,10 @@ Page {
 
         delegate: BackgroundItem {
             id: delegate
-
+            height: 130
+            anchors.verticalCenter: verticalCenter
             Label {
-                anchors.verticalCenter: parent.verticalCenter
+
                 Rectangle{
                     color :"transparent"
                     clip: true
@@ -63,23 +64,30 @@ Page {
                 Text
                 {
                     x: 100
-                    text:teamModel.get(index).name
+                    text: teamModel.get(index).position + ". " + teamModel.get(index).name
                     font.pixelSize: Theme.fontSizeLarge
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
                 Text
                 {
-                    x: 120
+                    x: 100
                     y: 50
-                    text:teamModel.get(index).position + "."
+                    text:"Won: "+teamModel.get(index).won + " Drawn: " + teamModel.get(index).drawn + " Lost: " + teamModel.get(index).lost
                     font.pixelSize: Theme.fontSizeMedium
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
-
+                Text
+                {
+                    x: 100
+                    y: 80
+                    text:"Goals Against: "+teamModel.get(index).goalsAgainst + " GoalsFor: " + teamModel.get(index).goalsFor
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
             }
             onClicked: console.log("Clicked " + index)
         }
-        VerticalScrollDecorator {}
+        VerticalScrollDecorator { flickable: listView }
     }
 }
 

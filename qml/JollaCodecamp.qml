@@ -71,8 +71,10 @@ ApplicationWindow
                     if(teamModel.teamImgCord[d["t"]]!= null)
                     {
                         teamModel.append({"name":d["t"],"position":d["p"],
-                                     "logox":teamModel.teamImgCord[d["t"]][0],
-                                     "logoy":teamModel.teamImgCord[d["t"]][1]
+                                            "logox":teamModel.teamImgCord[d["t"]][0],
+                                            "logoy":teamModel.teamImgCord[d["t"]][1],
+                                             "goalsFor":d["gf"],"goalsAgainst":d["ga"],
+                                             "won":d["w"], "lost":d["l"],"drawn":d["d"]
                                        });
                     }
                     teamModel.teamCount += 1;
@@ -144,7 +146,7 @@ ApplicationWindow
             name : "e.g. Team"
             position : "-1"
             goalsFor: "-1"
-            goalsAgains : "-1"
+            goalsAgainst : "-1"
             won : "-1"
             lost : "-1"
             drawn : "-1"
