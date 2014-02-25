@@ -21,5 +21,6 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     JollaCodecamp.desktop \
     qml/img/barclays_logo.jpg \
     qml/img/barclays_teams_logos.jpg \
-    qml/pages/WikipediaSearch.qml
+    qml/pages/WikipediaSearch.qml \
+    qml/pages/ThirdPage.qml
 
