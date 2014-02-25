@@ -114,6 +114,84 @@ ApplicationWindow
          "Cardiff City" : [1000,1000],
          "Fulham" : [-0,-588]
         }
+    }
+
+        XmlListModel
+        {
+            id: wikitableb
+            source: "http://en.wikipedia.org/w/api.php?format=xml&action=query&titles=Template:Current_Fu%C3%9Fball-Bundesliga_table&prop=revisions&rvprop=content"
+            query: "/api/query/pages/page/revisions"
+
+            XmlRole
+            {
+                name: "teksti"
+                query: "rev/string()"
+            }
+
+            onStatusChanged:
+            {
+                if (status === XmlListModel.Ready)
+                {
+                    var txt = get(0).teksti.replace("\n", "");
+                    var matches = txt.match(/Fb cl team(.*?)\}\}/g);
+                    //console.log(matches)
+                    teamModelb.teamCount = 0;
+                    teamModelb.clear();
+                    for(var i=0; i<matches.length; i++){
+                        var d = {}
+                        console.log(matches[i])
+                        var chunks = matches[i].split('|')
+                        for(var n=0; n<chunks.length; n++){
+                            if(chunks[n].indexOf('=') > -1){
+                                var tmp = chunks[n].split('=', 2)
+                                var k = tmp[0].trim()
+                                var v = tmp[1].trim()
+                                d[k] = v
+                            }
+                        }
+                        if(teamModelb.teamImgCord[d["t"]]!= null)
+                        {
+                            teamModelb.append({"name":d["t"],"position":d["p"],
+                                                "logox":teamModelb.teamImgCord[d["t"]][0],
+                                                "logoy":teamModelb.teamImgCord[d["t"]][1],
+                                                 "goalsFor":d["gf"],"goalsAgainst":d["ga"],
+                                                 "won":d["w"], "lost":d["l"],"drawn":d["d"]
+                                           });
+                        }
+                        teamModelb.teamCount += 1;
+                    }
+                    console.log(teamModelb.teamCount)
+                }
+            }
+        }
+
+        ListModel
+        {
+            id : teamModelb
+            property string text: "loading"
+            property variant stringArray : []
+            property int teamCount : 1
+            property var parseData : []
+            property var teamImgCord :{
+                "Bayern Munich" : [-780,-198],
+                "Leverkusen" : [-390,-195],
+                "Borussia Dortmund" : [-585,-782],
+                "Schalke 04" : [-975,-197],
+                "VfL Wolfsburg" : [-195,-197],
+                "Mönchengladbach" : [-780,-392],
+                "Hertha BSC" : [-1170,-782],
+                "Augsburg" : [-780,-587],
+                "Mainz" : [-780,-2],
+                "Hoffenheim" : [-195,-587],
+                "Hannover 96" : [-392,-392],
+                "Nürnberg" : [1000,1000],
+                "Eintracht Frankfurt" : [-1170,-587],
+                "Werder Bremen" : [1000,1000],
+                "Stuttgart" : [-972,-782],
+                "Hamburg" : [-195,-2],
+                "Freiburg" : [-585,-197],
+                "Braunschweig" : [-195,-782]
+            }
 
 
         signal loadCompleted()
@@ -160,5 +238,3 @@ ApplicationWindow
     initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
-
-
