@@ -31,60 +31,44 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+
 Page {
-
-    id: page
-
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
+    property int resizeVal : 2
+    SilicaListView {
+        id: listView
+        model: teamModel.parseData.length
         anchors.fill: parent
-
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-        PullDownMenu {
-            MenuItem {
-                text: "Show Page 2"
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
-            }
+        header: PageHeader {
+            title: "Premier past games"
         }
 
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
+        delegate: BackgroundItem {
+            id: delegate
+            height: Theme.listItemSmall
+            //anchors.verticalCenter: verticalCenter
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-
-            width: page.width
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: "UI Template"
-            }
-            Item
+            Text
             {
-                id : barclays_logo
-                SpriteSequence
-                {
-                    Sprite
-                    {
-                        source: "../img/barclays_teams_logos.jpg"
-                        frameX: 0
-                        frameY: 0
-                        frameWidth: 256
-                        frameHeight: 256
-                        to: {"still":1}
-                    }
-                }
-            }
-
-            Label {
                 x: Theme.paddingLarge
-                text: teamModel.text;
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                text: teamModel.parseData[index][2] + " vs. "+teamModel.parseData[index][3]
+                font.pixelSize: Theme.fontSizeSmall
+                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
+            Text
+            {
+                x: Theme.paddingLarge
+                y: 30
+                text: teamModel.parseData[index][1]
+                font.pixelSize: Theme.fontSizeSmall
+                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+            }
+            onClicked: console.log("Clicked " + index)
         }
+        VerticalScrollDecorator { flickable: listView }
     }
 }
+
+
+
 
 
