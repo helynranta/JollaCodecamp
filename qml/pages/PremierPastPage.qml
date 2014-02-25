@@ -38,28 +38,14 @@ Page {
         id: listView
         model: teamModel.parseData.length
         anchors.fill: parent
-<<<<<<< HEAD:qml/pages/PremierPastPage.qml
         header: PageHeader {
             title: "Premier past games"
-=======
-
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-        PullDownMenu {
-            MenuItem {
-                text: "valju"
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
-            }
-            MenuItem {
-                text: "buli"
-                onClicked: pageStack.push(Qt.resolvedUrl("ThirdPage.qml"))
-            }
->>>>>>> 4bfad4ac124beee26c20f0148b748b420b4cff59:qml/pages/FirstPage.qml
         }
 
         delegate: BackgroundItem {
             id: delegate
             height: Theme.listItemSmall
-            //anchors.verticalCenter: verticalCenter
+            anchors.verticalCenter: verticalCenter
 
             Text
             {

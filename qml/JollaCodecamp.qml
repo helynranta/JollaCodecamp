@@ -114,6 +114,32 @@ ApplicationWindow
          "Cardiff City" : [1000,1000],
          "Fulham" : [-0,-588]
         }
+        signal loadCompleted()
+
+        Component.onCompleted:
+        {
+            text = "does it even work ffs";
+            var xhr = new XMLHttpRequest;
+            xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/E1.csv", true);
+            xhr.send();
+            xhr.onreadystatechange = function()
+            {
+                text = "gibestive text";
+                if(xhr.readyState == XMLHttpRequest.DONE)
+                {
+                    text = xhr.responseText;
+                    stringArray = text.split("\n");
+                    text = "";
+                    var arrayLength = stringArray.length;
+                    for(var i = 1; i < arrayLength; i++)
+                    {
+                        var tempSplit = stringArray[i].split(",");
+                        parseData.push(tempSplit);
+                        //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
+                    }
+                }
+            }
+        }
     }
 
         XmlListModel
@@ -192,34 +218,6 @@ ApplicationWindow
                 "Freiburg" : [-585,-197],
                 "Braunschweig" : [-195,-782]
             }
-
-
-        signal loadCompleted()
-
-        Component.onCompleted:
-        {
-            text = "does it even work ffs";
-            var xhr = new XMLHttpRequest;
-            xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/E1.csv", true);
-            xhr.send();
-            xhr.onreadystatechange = function()
-            {
-                text = "gibestive text";
-                if(xhr.readyState == XMLHttpRequest.DONE)
-                {
-                    text = xhr.responseText;
-                    stringArray = text.split("\n");
-                    text = "";
-                    var arrayLength = stringArray.length;
-                    for(var i = 1; i < arrayLength; i++)
-                    {
-                        var tempSplit = stringArray[i].split(",");
-                        parseData.push(tempSplit);
-                        //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
-                    }
-                }
-            }
-        }
         ListElement
         {
             name : "e.g. Team"
