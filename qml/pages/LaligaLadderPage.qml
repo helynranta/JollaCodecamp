@@ -10,7 +10,7 @@ Page {
         model: bundesligaModel.teamCount
         anchors.fill: parent
         header: PageHeader {
-            title: "Bundesliga Ladder"
+            title: "La Liga Ladder"
         }
 
         delegate: BackgroundItem {
@@ -24,17 +24,17 @@ Page {
                     width: 195/resizeVal
                     height: 195/resizeVal
                     Image {
-                        x: bundesligaModel.get(index).logox/resizeVal
-                        y: bundesligaModel.get(index).logoy/resizeVal
-                        width: 1287/resizeVal
-                        height: 608/resizeVal
-                        source: "../img/bundesliga_teams_logos.png"
+                        x: laligaModel.get(index).logox/resizeVal
+                        y: laligaModel.get(index).logoy/resizeVal
+                        width: 1364/resizeVal
+                        height: 658/resizeVal
+                        source: "../img/laliga_teams_logos.png"
                     }
                 }
                 Text
                 {
                     x: 100
-                    text: bundesligaModel.get(index).position + ". " + bundesligaModel.get(index).name
+                    text: laligaModel.get(index).position + ". " + laligaModel.get(index).name
                     font.pixelSize: Theme.fontSizeLarge
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -42,7 +42,7 @@ Page {
                 {
                     x: 100
                     y: 50
-                    text:"Won: "+bundesligaModel.get(index).won + " Drawn: " + bundesligaModel.get(index).drawn + " Lost: " + bundesligaModel.get(index).lost
+                    text:"Won: "+laligaModel.get(index).won + " Drawn: " + laligaModel.get(index).drawn + " Lost: " + laligaModel.get(index).lost
                     font.pixelSize: Theme.fontSizeMedium
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -50,7 +50,7 @@ Page {
                 {
                     x: 100
                     y: 80
-                    text:"Goals Against: "+bundesligaModel.get(index).goalsAgainst + " GoalsFor: " + bundesligaModel.get(index).goalsFor
+                    text:"Goals Against: "+laligaModel.get(index).goalsAgainst + " GoalsFor: " + laligaModel.get(index).goalsFor
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }

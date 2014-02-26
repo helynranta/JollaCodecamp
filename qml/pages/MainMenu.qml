@@ -36,7 +36,7 @@ Page {
         id: mainMenuView
         anchors.fill: parent
         header: PageHeader {
-            title: "Soccer App"
+            title: "Fütböll Gibestive"
         }
 
 
@@ -58,8 +58,13 @@ Page {
             }
 
             ListElement {
-                name: "Bundesliga League Ladder"
+                name: "Bundesliga Ladder"
                 page:"BundesLadderPage"
+            }
+
+            ListElement {
+                name: "La Liga Ladder"
+                page:"LaligaLadderPage"
             }
        }
        delegate: BackgroundItem {
