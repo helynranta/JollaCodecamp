@@ -27,5 +27,9 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     qml/pages/BundesLadderPage.qml \
     qml/pages/PremierLadderPage.qml \
     qml/pages/PremierUpcomingPage.qml \
-    qml/pages/LaligaLadderPage.qml
+    qml/pages/LaligaLadderPage.qml \
+    qml/pages/BundesPastDetailPage.qml \
+    qml/pages/BundesPastPage.qml \
+    qml/pages/LaligaPastPage.qml \
+    qml/pages/LaligaPastDetailPage.qml
 

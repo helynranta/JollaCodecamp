@@ -28,7 +28,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: premierModel.parseData[theIndex][2] + " vs. "+premierModel.parseData[theIndex][3]
+                text: bundesligaModel.parseData[theIndex][2] + " vs. "+bundesligaModel.parseData[theIndex][3]
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.primaryColor
             }
@@ -36,7 +36,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: premierModel.parseData[theIndex][1]
+                text: bundesligaModel.parseData[theIndex][1]
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.primaryColor
             }
@@ -44,16 +44,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Score: "+premierModel.parseData[theIndex][4] + " - "+premierModel.parseData[theIndex][5]
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.primaryColor
-            }
-
-
-            Text
-            {
-                x: Theme.paddingLarge
-                text: "Referee: "+premierModel.parseData[theIndex][10]
+                text: "Score: "+bundesligaModel.parseData[theIndex][4] + " - "+bundesligaModel.parseData[theIndex][5]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -61,7 +52,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Shots: "+premierModel.parseData[theIndex][11] + " - "+premierModel.parseData[theIndex][12]
+                text: "Shots: "+bundesligaModel.parseData[theIndex][10] + " - "+bundesligaModel.parseData[theIndex][11]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -69,7 +60,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "On target: "+premierModel.parseData[theIndex][13] + " - "+premierModel.parseData[theIndex][14]
+                text: "On target: "+bundesligaModel.parseData[theIndex][12] + " - "+bundesligaModel.parseData[theIndex][13]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -77,7 +68,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Fouls: "+premierModel.parseData[theIndex][15] + " - "+premierModel.parseData[theIndex][16]
+                text: "Fouls: "+bundesligaModel.parseData[theIndex][14] + " - "+bundesligaModel.parseData[theIndex][15]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -85,7 +76,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Corners: "+premierModel.parseData[theIndex][17] + " - "+premierModel.parseData[theIndex][18]
+                text: "Corners: "+bundesligaModel.parseData[theIndex][16] + " - "+bundesligaModel.parseData[theIndex][17]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -93,7 +84,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Yellow cards: "+premierModel.parseData[theIndex][19] + " - "+premierModel.parseData[theIndex][20]
+                text: "Yellow cards: "+bundesligaModel.parseData[theIndex][18] + " - "+bundesligaModel.parseData[theIndex][19]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -101,7 +92,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Red cards: "+premierModel.parseData[theIndex][21] + " - "+premierModel.parseData[theIndex][22]
+                text: "Red cards: "+bundesligaModel.parseData[theIndex][20] + " - "+bundesligaModel.parseData[theIndex][21]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
