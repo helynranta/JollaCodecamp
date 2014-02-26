@@ -8,7 +8,7 @@ Page {
     property int resizeVal : 2
     SilicaListView {
         id: listView
-        model: 5
+        model: 20
         anchors.fill: parent
         header: PageHeader {
             title: "Premier League Upcoming"
@@ -25,8 +25,8 @@ Page {
                         width: 195/resizeVal
                         height: 195/resizeVal
                         Image {
-                            x: barclaysUpcoming.get(index).logox_a/resizeVal
-                            y: barclaysUpcoming.get(index).logoy_a/resizeVal
+                            x: premierModel.teamImgCord[barclaysUpcoming.next20games[index][1]][0]/resizeVal
+                            y: premierModel.teamImgCord[barclaysUpcoming.next20games[index][1]][1]/resizeVal
                             width: 1365/resizeVal
                             height: 1024/resizeVal
                             source: "../img/barclays_teams_logos.png"
@@ -41,8 +41,8 @@ Page {
                         width: 195/resizeVal
                         height: 195/resizeVal
                         Image {
-                            x: barclaysUpcoming.get(index).logox_b/resizeVal
-                            y: barclaysUpcoming.get(index).logoy_b/resizeVal
+                            x: premierModel.teamImgCord[barclaysUpcoming.next20games[index][2]][0]/resizeVal
+                            y: premierModel.teamImgCord[barclaysUpcoming.next20games[index][2]][1]/resizeVal
                             width: 1365/resizeVal
                             height: 1024/resizeVal
                             source: "../img/barclays_teams_logos.png"
@@ -52,7 +52,7 @@ Page {
                 Column{
                     Text
                     {
-                        text: barclaysUpcoming.get(index).name_a
+                        text: barclaysUpcoming.next20games[index][1]
                         font.pixelSize: Theme.fontSizeSmall
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     }
@@ -60,14 +60,14 @@ Page {
                     {
                         y: 30
 
-                        text: barclaysUpcoming.get(index).name_b
+                        text: barclaysUpcoming.next20games[index][2]
                         font.pixelSize: Theme.fontSizeSmall
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     }
                     Text
                     {
                         y: 60
-                        text: barclaysUpcoming.get(index).date
+                        text: barclaysUpcoming.next20games[index][0]
                         font.pixelSize: Theme.fontSizeSmall
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     }
