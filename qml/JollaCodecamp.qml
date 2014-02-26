@@ -227,6 +227,32 @@ ApplicationWindow
                 "Freiburg" : [-222,-412],
                 "Braunschweig" : [-829,-202]
             }
+            signal loadCompleted()
+
+            Component.onCompleted:
+            {
+                text = "does it even work ffs";
+                var xhr = new XMLHttpRequest;
+                xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/D1.csv", true);
+                xhr.send();
+                xhr.onreadystatechange = function()
+                {
+                    text = "gibestive text";
+                    if(xhr.readyState == XMLHttpRequest.DONE)
+                    {
+                        text = xhr.responseText;
+                        stringArray = text.split("\n");
+                        text = "";
+                        var arrayLength = stringArray.length;
+                        for(var i = 1; i < arrayLength-1; i++) //last line is empty
+                        {
+                            var tempSplit = stringArray[i].split(",");
+                            parseData.unshift(tempSplit); //insert as first
+                            //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
+                        }
+                    }
+                }
+            }
         ListElement
         {
             name : "e.g. Team"
@@ -326,6 +352,34 @@ ApplicationWindow
                 "Rayo Vallecano" : [-198,-448],
                 "Betis" : [-423,-214]
             }
+
+            signal loadCompleted()
+
+            Component.onCompleted:
+            {
+                text = "does it even work ffs";
+                var xhr = new XMLHttpRequest;
+                xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/SP1.csv", true);
+                xhr.send();
+                xhr.onreadystatechange = function()
+                {
+                    text = "gibestive text";
+                    if(xhr.readyState == XMLHttpRequest.DONE)
+                    {
+                        text = xhr.responseText;
+                        stringArray = text.split("\n");
+                        text = "";
+                        var arrayLength = stringArray.length;
+                        for(var i = 1; i < arrayLength-1; i++) //last line is empty
+                        {
+                            var tempSplit = stringArray[i].split(",");
+                            parseData.unshift(tempSplit); //insert as first
+                            //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
+                        }
+                    }
+                }
+            }
+
         ListElement
         {
             name : "e.g. Team"

@@ -31,61 +31,40 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+
 Page {
+    property int resizeVal : 2
     SilicaListView {
-        id: mainMenuView
+        id: listView
+        model: bundesligaModel.parseData.length
         anchors.fill: parent
         header: PageHeader {
-            title: "Fütböll Gibestive"
+            title: "Bundesliga past games"
         }
 
+        delegate: BackgroundItem {
+            id: delegate
+            height: Theme.listItemSmall
 
-        model: ListModel {
-            ListElement {
-                name: "Premier League Ladder"
-                page:"PremierLadderPage"
+            Text
+            {
+                x: Theme.paddingLarge
+                text: bundesligaModel.parseData[index][2] + " vs. "+bundesligaModel.parseData[index][3]
+                font.pixelSize: Theme.fontSizeSmall
+                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-
-
-            ListElement {
-                name: "Premier upcoming games"
-                page:"PremierUpcomingPage"
+            Text
+            {
+                x: Theme.paddingLarge
+                y: 30
+                text: bundesligaModel.parseData[index][1]
+                font.pixelSize: Theme.fontSizeSmall
+                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-
-            ListElement {
-                name: "Premier past games"
-                page:"PremierPastPage"
+            onClicked: {
+                pageStack.push( Qt.resolvedUrl("BundesPastDetailPage.qml"), {theIndex: index});
             }
-
-            ListElement {
-                name: "Bundesliga Ladder"
-                page:"BundesLadderPage"
-            }
-
-            ListElement {
-                name: "Bundesliga past games"
-                page:"BundesPastPage"
-            }
-
-            ListElement {
-                name: "La Liga Ladder"
-                page:"LaligaLadderPage"
-            }
-
-            ListElement {
-                name: "La Liga past games"
-                page:"LaligaPastPage"
-            }
-       }
-       delegate: BackgroundItem {
-           width: ListView.view.width
-           //height: Theme.itemSizeSmall
-           Row{
-               x: Theme.paddingLarge
-               Label {text: name }
-           }
-           onClicked: pageStack.push(Qt.resolvedUrl(page+".qml"))
-       }
-       VerticalScrollDecorator { flickable: listView }
+        }
+        VerticalScrollDecorator { flickable: listView }
     }
 }

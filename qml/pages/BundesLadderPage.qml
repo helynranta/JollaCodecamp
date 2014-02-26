@@ -10,7 +10,7 @@ Page {
         model: bundesligaModel.teamCount
         anchors.fill: parent
         header: PageHeader {
-            title: "Bundesliga Ladder"
+        title: "Bundesliga Ladder"
         }
 
         delegate: BackgroundItem {

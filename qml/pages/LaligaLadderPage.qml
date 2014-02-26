@@ -7,10 +7,10 @@ Page {
     property int resizeVal : 2
     SilicaListView {
         id: listView
-        model: bundesligaModel.teamCount
+        model: laligaModel.teamCount
         anchors.fill: parent
         header: PageHeader {
-            title: "La Liga Ladder"
+        title: "La Liga Ladder"
         }
 
         delegate: BackgroundItem {
