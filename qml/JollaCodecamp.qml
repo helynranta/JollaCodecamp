@@ -35,9 +35,12 @@ import "pages"
 
 ApplicationWindow
 {
+    /**************************
+     xml parsing for barclays
+    ***************************/
     XmlListModel
     {
-        id: wikitable
+        id: premierXML
         source: "http://en.wikipedia.org/w/api.php?format=xml&action=query&generator=templates&titles=2013%E2%80%9314_Premier_League&prop=revisions&rvprop=content"
         query: "/api/query/pages/page[@pageid=39501437]/revisions"
 
@@ -54,11 +57,11 @@ ApplicationWindow
                 var txt = get(0).teksti.replace("\n", "");
                 var matches = txt.match(/Fb cl team(.*?)bold/g);
                 //console.log(matches)
-                teamModel.teamCount = 0;
-                teamModel.clear();
+                premierModel.teamCount = 0;
+                premierModel.clear();
                 for(var i=0; i<matches.length; i++){
                     var d = {}
-                    console.log(matches[i])
+                    //console.log(matches[i])
                     var chunks = matches[i].split('|')
                     for(var n=0; n<chunks.length; n++){
                         if(chunks[n].indexOf('=') > -1)
@@ -69,25 +72,27 @@ ApplicationWindow
                             d[k] = v
                         }
                     }
-                    if(teamModel.teamImgCord[d["t"]]!= null)
+                    if(premierModel.teamImgCord[d["t"]]!= null)
                     {
-                        teamModel.append({"name":d["t"],"position":d["p"],
-                                            "logox":teamModel.teamImgCord[d["t"]][0],
-                                            "logoy":teamModel.teamImgCord[d["t"]][1],
+                        premierModel.append({"name":d["t"],"position":d["p"],
+                                            "logox":premierModel.teamImgCord[d["t"]][0],
+                                            "logoy":premierModel.teamImgCord[d["t"]][1],
                                              "goalsFor":d["gf"],"goalsAgainst":d["ga"],
                                              "won":d["w"], "lost":d["l"],"drawn":d["d"]
                                        });
                     }
-                    teamModel.teamCount += 1;
+                    premierModel.teamCount += 1;
                 }
-                console.log(teamModel.teamCount)
+                //console.log(premierModel.teamCount)
             }
         }
     }
-
+    /**************************
+       Barclays team list
+    ***************************/
     ListModel
     {
-        id : teamModel
+        id : premierModel
         property string text: "loading"
         property variant stringArray : []
         property int teamCount : 1
@@ -141,10 +146,13 @@ ApplicationWindow
             }
         }
     }
-
-        XmlListModel
-        {
-            id: wikitableb
+    /**************************
+    xml parsing for bundelsliga
+    fetches data from wikipedia api
+    ***************************/
+    XmlListModel
+    {
+            id: bundesligaXML
             source: "http://en.wikipedia.org/w/api.php?format=xml&action=query&titles=Template:Current_Fu%C3%9Fball-Bundesliga_table&prop=revisions&rvprop=content"
             query: "/api/query/pages/page/revisions"
 
@@ -161,11 +169,11 @@ ApplicationWindow
                     var txt = get(0).teksti.replace("\n", "");
                     var matches = txt.match(/Fb cl team(.*?)\}\}/g);
                     //console.log(matches)
-                    teamModelb.teamCount = 0;
-                    teamModelb.clear();
+                    bundesligaModel.teamCount = 0;
+                    bundesligaModel.clear();
                     for(var i=0; i<matches.length; i++){
                         var d = {}
-                        console.log(matches[i])
+                        //console.log(matches[i])
                         var chunks = matches[i].split('|')
                         for(var n=0; n<chunks.length; n++){
                             if(chunks[n].indexOf('=') > -1){
@@ -175,25 +183,26 @@ ApplicationWindow
                                 d[k] = v
                             }
                         }
-                        if(teamModelb.teamImgCord[d["t"]]!= null)
+                        if(bundesligaModel.teamImgCord[d["t"]]!= null)
                         {
-                            teamModelb.append({"name":d["t"],"position":d["p"],
-                                                "logox":teamModelb.teamImgCord[d["t"]][0],
-                                                "logoy":teamModelb.teamImgCord[d["t"]][1],
+                            bundesligaModel.append({"name":d["t"],"position":d["p"],
+                                                "logox":bundesligaModel.teamImgCord[d["t"]][0],
+                                                "logoy":bundesligaModel.teamImgCord[d["t"]][1],
                                                  "goalsFor":d["gf"],"goalsAgainst":d["ga"],
                                                  "won":d["w"], "lost":d["l"],"drawn":d["d"]
                                            });
                         }
-                        teamModelb.teamCount += 1;
+                        bundesligaModel.teamCount += 1;
                     }
-                    console.log(teamModelb.teamCount)
                 }
             }
         }
-
-        ListModel
-        {
-            id : teamModelb
+    /*************************
+      Bundesliga team list
+    **************************/
+    ListModel
+    {
+            id : bundesligaModel
             property string text: "loading"
             property variant stringArray : []
             property int teamCount : 1
@@ -232,7 +241,140 @@ ApplicationWindow
             source: "img/barclays_teams_logos.png"
         }
     }
+    /**************************
+     bundesliga upcoming games
+     fetches data from lasshi's server
+    ***************************/
+    ListModel
+    {
+        id : bundesUpcoming
+        property var bundesArray : []
+        property string covertext : "Cover"
+
+        Component.onCompleted:
+        {
+            var xhr = new XMLHttpRequest;
+            xhr.open("GET", "http://koti.mbnet.fi/lasshi/opendata/bundesliga_schedule.csv", true);
+            xhr.send();
+            xhr.onreadystatechange = function()
+            {
+                if(xhr.readyState == XMLHttpRequest.DONE)
+                {
+                    var lineArray = xhr.responseText.split("\n");
+                    var lineLenght = lineArray.length;
+                    for(var i = 0; i < lineLenght; i++)
+                    {
+                        var gameArr = lineArray[i].split(",");
+                        bundesUpcoming.bundesArray.push(gameArr);
+                    }
+                    var date = new Date();
+                    var month = date.getMonth()+1;
+                    var day = date.getDate();
+                    var year = date.getFullYear();
+
+                    var found = false
+                    var listLen = bundesUpcoming.bundesArray.length
+                    for(var i = 0; i < listLen; i++)
+                    {
+                        var gameDate = bundesUpcoming.bundesArray[i][0].split("/")
+                        console.log(gameDate[0]+"/"+gameDate[1]);
+                        if((gameDate[0]>day && gameDate[1]==month) || gameDate[1] > month)
+                        {
+                            console.log("found game!");
+                            bundesUpcoming.covertext = bundesUpcoming.bundesArray[i][0]+"\n\n"+bundesUpcoming.bundesArray[i][1]+"\nvs\n"+bundesUpcoming.bundesArray[i][2];
+                            found = true;
+                        }
+                        if(found)
+                            break;
+                    }
+                }
+            }
+        }
+    }
+    /**************************
+     premier upcoming games
+    ***************************/
+    ListModel
+    {
+        id : barclaysUpcoming
+        property var bundesArray : []
+        property string covertext : "Cover"
+
+        signal onCompleted();
+
+        Component.onCompleted:
+        {
+            var xhr = new XMLHttpRequest;
+            xhr.open("GET", "http://koti.mbnet.fi/lasshi/opendata/barclays_schedule.csv", true);
+            xhr.send();
+            xhr.onreadystatechange = function()
+            {
+                if(xhr.readyState == XMLHttpRequest.DONE)
+                {
+                    var lineArray = xhr.responseText.split("\n");
+                    var lineLenght = lineArray.length;
+                    for(var i = 0; i < lineLenght; i++)
+                    {
+                        var gameArr = lineArray[i].split(",");
+                        barclaysUpcoming.bundesArray.push(gameArr);
+                    }
+                    var date = new Date();
+                    var month = date.getMonth()+1;
+                    var day = date.getDate();
+                    var year = date.getFullYear();
+
+                    var found = false
+                    var listLen = barclaysUpcoming.bundesArray.length
+                    for(var i = 0; i < listLen; i++)
+                    {
+                        var gameDate = barclaysUpcoming.bundesArray[i][0].split("/")
+                        //console.log(gameDate[0]+"/"+gameDate[1]);
+                        if(((gameDate[0]>day && gameDate[1]===month) || gameDate[1] > month)&&gameDate[3]===year)
+                        {
+                            console.log("found game!");
+                            barclaysUpcoming.covertext += barclaysUpcoming.bundesArray[i][0]+"\n\n"+barclaysUpcoming.bundesArray[i][1]+"\nvs\n"+barclaysUpcoming.bundesArray[i][2];
+                            found = true;
+                        }
+                        if(found)
+                            break;
+                    }
+                }
+            }
+        }
+    }
 
     initialPage: Component { MainMenu { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    cover:
+        CoverBackground {
+            Label {
+                id : coverlabel
+                anchors.centerIn: parent
+                property string covertext : bundesUpcoming.covertext
+                text:covertext
+                font.pixelSize: Theme.fontSizeExtraSmall
+            }
+
+            CoverActionList {
+                id: coverAction
+
+                CoverAction
+                {
+                    iconSource: "image://theme/icon-cover-next"
+                    onTriggered:
+                    {
+                        coverlabel.covertext = bundesUpcoming.covertext
+                    }
+                }
+
+                CoverAction
+                {
+                    iconSource: "image://theme/icon-cover-pause"
+                    onTriggered:
+                    {
+                        coverlabel.covertext = barclaysUpcoming.covertext;
+                    }
+
+                }
+            }
+        }
 }

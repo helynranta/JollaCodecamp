@@ -36,7 +36,7 @@ Page {
     property int resizeVal : 2
     SilicaListView {
         id: listView
-        model: teamModel.parseData.length
+        model: premierModel.parseData.length
         anchors.fill: parent
         header: PageHeader {
             title: "Premier past games"
@@ -49,7 +49,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: teamModel.parseData[index][2] + " vs. "+teamModel.parseData[index][3]
+                text: premierModel.parseData[index][2] + " vs. "+premierModel.parseData[index][3]
                 font.pixelSize: Theme.fontSizeSmall
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
@@ -57,7 +57,7 @@ Page {
             {
                 x: Theme.paddingLarge
                 y: 30
-                text: teamModel.parseData[index][1]
+                text: premierModel.parseData[index][1]
                 font.pixelSize: Theme.fontSizeSmall
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }

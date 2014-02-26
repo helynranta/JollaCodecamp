@@ -33,20 +33,33 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
     Label {
-        id: label
+        id : label
         anchors.centerIn: parent
-        text: "My Cover"
+        property string convertext : bundesUpcoming.covertext
+        text:covertext
+        font.pixelSize: Theme.fontSizeExtraSmall
     }
 
     CoverActionList {
         id: coverAction
 
-        CoverAction {
+        CoverAction
+        {
             iconSource: "image://theme/icon-cover-next"
+            onTriggered:
+            {
+                label.convertext = bundesUpcoming.covertext
+            }
         }
 
-        CoverAction {
+        CoverAction
+        {
             iconSource: "image://theme/icon-cover-pause"
+            onTriggered:
+            {
+                label.convertext = barclaysUpcoming.covertext;
+            }
+
         }
     }
 }

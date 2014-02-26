@@ -7,7 +7,7 @@ Page {
     property int resizeVal : 2
     SilicaListView {
         id: listView
-        model: teamModelb.teamCount
+        model: bundesligaModel.teamCount
         anchors.fill: parent
         header: PageHeader {
             title: "Nested Page"
@@ -24,8 +24,8 @@ Page {
                     width: 195/resizeVal
                     height: 195/resizeVal
                     Image {
-                        x: teamModelb.get(index).logox/resizeVal
-                        y: teamModelb.get(index).logoy/resizeVal
+                        x: bundesligaModel.get(index).logox/resizeVal
+                        y: bundesligaModel.get(index).logoy/resizeVal
                         width: 1365/resizeVal
                         height: 1024/resizeVal
                         source: "../img/barclays_teams_logos.png"
@@ -34,7 +34,7 @@ Page {
                 Text
                 {
                     x: 100
-                    text: teamModelb.get(index).position + ". " + teamModelb.get(index).name
+                    text: bundesligaModel.get(index).position + ". " + bundesligaModel.get(index).name
                     font.pixelSize: Theme.fontSizeLarge
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -42,7 +42,7 @@ Page {
                 {
                     x: 100
                     y: 50
-                    text:"Won: "+teamModelb.get(index).won + " Drawn: " + teamModelb.get(index).drawn + " Lost: " + teamModelb.get(index).lost
+                    text:"Won: "+bundesligaModel.get(index).won + " Drawn: " + bundesligaModel.get(index).drawn + " Lost: " + bundesligaModel.get(index).lost
                     font.pixelSize: Theme.fontSizeMedium
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -50,7 +50,7 @@ Page {
                 {
                     x: 100
                     y: 80
-                    text:"Goals Against: "+teamModelb.get(index).goalsAgainst + " GoalsFor: " + teamModelb.get(index).goalsFor
+                    text:"Goals Against: "+bundesligaModel.get(index).goalsAgainst + " GoalsFor: " + bundesligaModel.get(index).goalsFor
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }

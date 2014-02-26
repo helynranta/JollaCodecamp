@@ -22,13 +22,13 @@ Page {
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: "asd: "+theIndex //teamModel.parseData[theIndex]
+                title: "asd: "+theIndex //premierModel.parseData[theIndex]
             }
 
             Text
             {
                 x: Theme.paddingLarge
-                text: teamModel.parseData[theIndex][2] + " vs. "+teamModel.parseData[theIndex][3]
+                text: premierModel.parseData[theIndex][2] + " vs. "+premierModel.parseData[theIndex][3]
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.primaryColor
             }
@@ -36,7 +36,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: teamModel.parseData[theIndex][1]
+                text: premierModel.parseData[theIndex][1]
                 font.pixelSize: Theme.fontSizeMedium
                 color: Theme.primaryColor
             }
@@ -44,7 +44,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Score: "+teamModel.parseData[theIndex][4] + " - "+teamModel.parseData[theIndex][5]
+                text: "Score: "+premierModel.parseData[theIndex][4] + " - "+premierModel.parseData[theIndex][5]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
@@ -53,7 +53,7 @@ Page {
             Text
             {
                 x: Theme.paddingLarge
-                text: "Referee: "+teamModel.parseData[theIndex][10]
+                text: "Referee: "+premierModel.parseData[theIndex][10]
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
             }
