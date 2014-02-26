@@ -168,13 +168,15 @@ ApplicationWindow
                 {
                     var txt = get(0).teksti.replace("\n", "");
                     var matches = txt.match(/Fb cl team(.*?)\}\}/g);
+
                     //console.log(matches)
                     bundesligaModel.teamCount = 0;
                     bundesligaModel.clear();
                     for(var i=0; i<matches.length; i++){
                         var d = {}
                         //console.log(matches[i])
-                        var chunks = matches[i].split('|')
+                        var chunks = matches[i].replace("}}", "").split('|') //dat workaround..
+
                         for(var n=0; n<chunks.length; n++){
                             if(chunks[n].indexOf('=') > -1){
                                 var tmp = chunks[n].split('=', 2)
