@@ -15,7 +15,6 @@ SOURCES += src/JollaCodecamp.cpp
 OTHER_FILES += qml/JollaCodecamp.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    qml/pages/SecondPage.qml \
     rpm/JollaCodecamp.spec \
     rpm/JollaCodecamp.yaml \
     JollaCodecamp.desktop \
@@ -24,6 +23,7 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     qml/pages/WikipediaSearch.qml \
     qml/pages/MainMenu.qml \
     qml/pages/PremierPastPage.qml \
-    qml/pages/ThirdPage.qml \
-    qml/pages/PremierPastDetailPage.qml
+    qml/pages/PremierPastDetailPage.qml \
+    qml/pages/BundesLadderPage.qml \
+    qml/pages/PremierLadderPage.qml
 

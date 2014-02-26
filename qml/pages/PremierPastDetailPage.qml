@@ -22,7 +22,7 @@ Page {
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: "asd: "+theIndex //premierModel.parseData[theIndex]
+                title: "Match details"
             }
 
             Text
