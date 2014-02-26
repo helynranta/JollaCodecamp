@@ -208,24 +208,24 @@ ApplicationWindow
             property int teamCount : 1
             property var parseData : []
             property var teamImgCord :{
-                "Bayern Munich" : [-780,-198],
-                "Leverkusen" : [-390,-195],
-                "Borussia Dortmund" : [-585,-782],
-                "Schalke 04" : [-975,-197],
-                "VfL Wolfsburg" : [-195,-197],
-                "Mönchengladbach" : [-780,-392],
-                "Hertha BSC" : [-1170,-782],
-                "Augsburg" : [-780,-587],
-                "Mainz" : [-780,-2],
-                "Hoffenheim" : [-195,-587],
-                "Hannover 96" : [-392,-392],
-                "Nürnberg" : [1000,1000],
-                "Eintracht Frankfurt" : [-1170,-587],
-                "Werder Bremen" : [1000,1000],
-                "Stuttgart" : [-972,-782],
-                "Hamburg" : [-195,-2],
-                "Freiburg" : [-585,-197],
-                "Braunschweig" : [-195,-782]
+                "Bayern Munich" : [-0,-0],
+                "Leverkusen" : [-210,-210],
+                "Borussia Dortmund" : [-0,-196],
+                "Schalke 04" : [-0,-410],
+                "VfL Wolfsburg" : [-1108,-410],
+                "Mönchengladbach" : [-643,-187],
+                "Hertha BSC" : [-829,-202],
+                "Augsburg" : [-1129,-2],
+                "Mainz" : [-888,-410],
+                "Hoffenheim" : [-447,-214],
+                "Hannover 96" : [-882,-0],
+                "Nürnberg" : [-655,-410],
+                "Eintracht Frankfurt" : [-655,-2],
+                "Werder Bremen" : [-205,-5],
+                "Stuttgart" : [-424,-410],
+                "Hamburg" : [-1068,-212],
+                "Freiburg" : [-222,-412],
+                "Braunschweig" : [-829,-202]
             }
         ListElement
         {
@@ -241,6 +241,109 @@ ApplicationWindow
             source: "img/barclays_teams_logos.png"
         }
     }
+
+
+    /**************************
+    xml parsing for La Liga
+    fetches data from wikipedia api
+    ***************************/
+    XmlListModel
+    {
+            id: laligaXML
+            source: "http://en.wikipedia.org/w/api.php?format=xml&action=query&titles=2013%E2%80%9314_La_Liga&prop=revisions&rvprop=content"
+            query: "/api/query/pages/page/revisions"
+
+            XmlRole
+            {
+                name: "teksti"
+                query: "rev/string()"
+            }
+
+            onStatusChanged:
+            {
+                if (status === XmlListModel.Ready)
+                {
+                    var txt = get(0).teksti.replace("\n", "");
+                    var matches = txt.match(/Fb cl team(.*?)\}\}/g);
+                    //console.log(matches)
+                    laligaModel.teamCount = 0;
+                    laligaModel.clear();
+                    for(var i=0; i<matches.length; i++){
+                        var d = {}
+                        //console.log(matches[i])
+                        var chunks = matches[i].split('|')
+                        for(var n=0; n<chunks.length; n++){
+                            if(chunks[n].indexOf('=') > -1){
+                                var tmp = chunks[n].split('=', 2)
+                                var k = tmp[0].trim()
+                                var v = tmp[1].trim()
+                                d[k] = v
+                            }
+                        }
+                        if(laligaModel.teamImgCord[d["t"]]!= null)
+                        {
+                            laligaModel.append({"name":d["t"],"position":d["p"],
+                                                "logox":laligaModel.teamImgCord[d["t"]][0],
+                                                "logoy":laligaModel.teamImgCord[d["t"]][1],
+                                                 "goalsFor":d["gf"],"goalsAgainst":d["ga"],
+                                                 "won":d["w"], "lost":d["l"],"drawn":d["d"]
+                                           });
+                        }
+                        laligaModel.teamCount += 1;
+                    }
+                }
+            }
+        }
+    /*************************
+      La Liga team list
+    **************************/
+    ListModel
+    {
+            id : laligaModel
+            property string text: "loading"
+            property variant stringArray : []
+            property int teamCount : 1
+            property var parseData : []
+            property var teamImgCord :{
+                "Real Madrid" : [-0,-220],
+                "Barcelona" : [-0,-0],
+                "Atlético Madrid" : [-0,-448],
+                "Athletic Bilbao" : [-851,-454],
+                "Villarreal" : [1000,1000],
+                "Real Sociedad" : [-433,-4],
+                "Valencia" : [-219,-217],
+                "Sevilla" : [-642,-0],
+                "Levante" : [-438,-450],
+                "Espanyol" : [-855,-0],
+                "Celta de Vigo" : [-1227,-0],
+                "Osasuna" : [-1048,-216],
+                "Granada" : [-1231,-219],
+                "Elche" : [1000,1000],
+                "Almería" : [1000,1000],
+                "Getafe" : [-646,-451],
+                "Malaga" : [-210,-0],
+                "Valladolid" : [-645,-214],
+                "Rayo Vallecano" : [-198,-448],
+                "Betis" : [-423,-214]
+            }
+        ListElement
+        {
+            name : "e.g. Team"
+            position : "-1"
+            goalsFor: "-1"
+            goalsAgainst : "-1"
+            won : "-1"
+            lost : "-1"
+            drawn : "-1"
+            logox: -390
+            logoy: -195
+            source: "img/barclays_teams_logos.png"
+        }
+    }
+
+
+
+
     /**************************
      bundesliga upcoming games
      fetches data from lasshi's server
