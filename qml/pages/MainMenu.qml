@@ -43,13 +43,13 @@ Page {
         model: ListModel {
             ListElement {
                 name: "Premier League Ladder"
-                page:"SecondPage"
+                page:"PremierLadderPage"
             }
 
 
             ListElement {
                 name: "Premier upcoming games"
-                page:"SecondPage"
+                page:"PremierUpcomingPage"
             }
 
             ListElement {
@@ -58,8 +58,8 @@ Page {
             }
 
             ListElement {
-                name: "Asdasd League Ladder"
-                page:"ThirdPage"
+                name: "Bundesliga League Ladder"
+                page:"BundesLadderPage"
             }
        }
        delegate: BackgroundItem {
