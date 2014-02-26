@@ -407,6 +407,7 @@ ApplicationWindow
         id : bundesUpcoming
         property var bundesArray : []
         property string covertext : "Cover"
+        property var coverarray : []
         property var next20games : []
 
         Component.onCompleted:
@@ -435,10 +436,12 @@ ApplicationWindow
                     for(var i = 0; i < listLen; i++)
                     {
                         var gameDate = bundesUpcoming.bundesArray[i][0].split("/")
-                        console.log(gameDate[0]+"/"+gameDate[1]);
-                        if((gameDate[0]>day && gameDate[1]==month) || gameDate[1] > month)
+                        console.log(gameDate[0]+"/"+gameDate[1]+"/"+gameDate[2]);
+                        if(((gameDate[0]>day && gameDate[1]==month)|| gameDate[1] > month))
                         {
-                            bundesUpcoming.covertext = bundesUpcoming.bundesArray[i][0]+"\n\n"+bundesUpcoming.bundesArray[i][1]+"\nvs\n"+bundesUpcoming.bundesArray[i][2];
+                            bundesUpcoming.coverarray.push(gameDate[0]+"/"+gameDate[1]+"/2014");
+                            bundesUpcoming.coverarray.push(bundesUpcoming.bundesArray[i][1]);
+                            bundesUpcoming.coverarray.push(bundesUpcoming.bundesArray[i][2]);
                             for(var a=0; a < 20;a++)
                                 next20games.push(bundesUpcoming[i+a])
                             found = true;
@@ -502,29 +505,15 @@ ApplicationWindow
 
                         if(((gameDate[0]>day && gameDate[1]==month)|| gameDate[1] > month) && gameDate[2]==year)
                         {
-                            barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][0]);
+                            barclaysUpcoming.coverarray.push(gameDate[0]+"/"+gameDate[1]+"/2014");//purkka
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][1]);
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][2]);
-                            console.log(barclaysUpcoming.covertext);
                             for(var a=0; a < 20;a++)
                                 next20games.push(barclaysUpcoming[i+a])
                             found = true;
                         }
                         if(found)
                             break;
-                    }
-                    for(var i = 0; i < 20; i++)
-                    {
-                        if(premierModel.get(i).name == barclaysUpcoming.coverarray[1])
-                        {
-                            coverlabel.logo1x = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][0]/coverlabel.resizeVal
-                            coverlabel.logo1y = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][1]/coverlabel.resizeVal
-                        }
-                        if(premierModel.get(i).name == barclaysUpcoming.coverarray[2])
-                        {
-                            coverlabel.logo2x = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][0]/coverlabel.resizeVal
-                            coverlabel.logo2y = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][1]/coverlabel.resizeVal
-                        }
                     }
                 }
             }
@@ -543,13 +532,16 @@ ApplicationWindow
                 id : coverlabel
                 height: 400
                 width: 200
-                property string covertext : ""
-                property string logo1x : premierModel.teamImgCord["Arsenal"][0]/coverlabel.resizeVal
-                property string logo1y : premierModel.teamImgCord["Arsenal"][1]/coverlabel.resizeVal
-                property string logo2x : premierModel.teamImgCord["Arsenal"][0]/coverlabel.resizeVal
-                property string logo2y : premierModel.teamImgCord["Arsenal"][1]/coverlabel.resizeVal
+                property string covertext : "Swipe right to Bundes\nand left for Premier upcoming"
+                property string logo1x : ""
+                property string logo1y : ""
+                property string logo2x : ""
+                property string logo2y : ""
                 property string imgSource : "img/barclays_teams_logos.png"
                 property double resizeVal : 2.5
+                property double imgSizex : 100
+                property double imgSizey : 100
+
                 Text
                 {
                     text: "Upcoming games:\n\n\n\n\n\n\n"
@@ -576,8 +568,8 @@ ApplicationWindow
                         id: coverteam1logo
                         x: coverlabel.logo1x
                         y: coverlabel.logo1y
-                        width: 1365/coverlabel.resizeVal
-                        height: 1024/coverlabel.resizeVal
+                        width: coverlabel.imgSizex/coverlabel.resizeVal
+                        height: coverlabel.imgSizey/coverlabel.resizeVal
                         source: coverlabel.imgSource
                     }
                 }
@@ -594,8 +586,8 @@ ApplicationWindow
                          id: coverteam2logo
                          x: coverlabel.logo2x
                          y: coverlabel.logo2y
-                         width: 1365/coverlabel.resizeVal
-                         height: 1024/coverlabel.resizeVal
+                         width: coverlabel.imgSizex/coverlabel.resizeVal
+                         height: coverlabel.imgSizey/coverlabel.resizeVal
                          source: coverlabel.imgSource
                      }
                  }
@@ -608,46 +600,35 @@ ApplicationWindow
                 CoverAction
                 {
                     iconSource: "image://theme/icon-cover-pause"
+
                     onTriggered:
                     {
+                        coverlabel.imgSizex = 1287;
+                        coverlabel.imgSizey = 608;
                         coverlabel.imgSource = "img/bundesliga_teams_logos.png";
                         coverlabel.covertext = bundesUpcoming.coverarray[0];
-                        for(var i = 0; i < 20; i++)
-                        {
-                            if(premierModel.get(i).name == bundesUpcoming.coverarray[1])
-                            {
-                                coverlabel.logo1x = premierModel.teamImgCord[bundesUpcoming.coverarray[1]][0]/coverlabel.resizeVal
-                                coverlabel.logo1y = premierModel.teamImgCord[bundesUpcoming.coverarray[1]][1]/coverlabel.resizeVal
-                            }
-                            if(premierModel.get(i).name == bundesUpcoming.coverarray[2])
-                            {
-                                coverlabel.logo2x = premierModel.teamImgCord[bundesUpcoming.coverarray[2]][0]/coverlabel.resizeVal
-                                coverlabel.logo2y = premierModel.teamImgCord[bundesUpcoming.coverarray[2]][1]/coverlabel.resizeVal
-                            }
-                        }
+                        coverlabel.logo1x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][0]/coverlabel.resizeVal
+                        coverlabel.logo1y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][1]/coverlabel.resizeVal
+                        coverlabel.logo2x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][0]/coverlabel.resizeVal
+                        coverlabel.logo2y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][1]/coverlabel.resizeVal
+                        console.log(bundesUpcoming.coverarray[1]);
                     }
                 }
 
                 CoverAction
                 {
                     iconSource: "image://theme/icon-cover-pause"
+
                     onTriggered:
                     {
+                        coverlabel.imgSizex = 1365;
+                        coverlabel.imgSizey =  1024;
                         coverlabel.imgSource = "img/barclays_teams_logos.png";
                         coverlabel.covertext = barclaysUpcoming.coverarray[0];
-                        for(var i = 0; i < 20; i++)
-                        {
-                            if(premierModel.get(i).name == barclaysUpcoming.coverarray[1])
-                            {
-                                coverlabel.logo1x = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][0]/coverlabel.resizeVal
-                                coverlabel.logo1y = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][1]/coverlabel.resizeVal
-                            }
-                            if(premierModel.get(i).name == barclaysUpcoming.coverarray[2])
-                            {
-                                coverlabel.logo2x = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][0]/coverlabel.resizeVal
-                                coverlabel.logo2y = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][1]/coverlabel.resizeVal
-                            }
-                        }
+                        coverlabel.logo1x = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][0]/coverlabel.resizeVal
+                        coverlabel.logo1y = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][1]/coverlabel.resizeVal
+                        coverlabel.logo2x = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][0]/coverlabel.resizeVal
+                        coverlabel.logo2y = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][1]/coverlabel.resizeVal
                     }
                 }
             }
