@@ -168,13 +168,15 @@ ApplicationWindow
                 {
                     var txt = get(0).teksti.replace("\n", "");
                     var matches = txt.match(/Fb cl team(.*?)\}\}/g);
+
                     //console.log(matches)
                     bundesligaModel.teamCount = 0;
                     bundesligaModel.clear();
                     for(var i=0; i<matches.length; i++){
                         var d = {}
                         //console.log(matches[i])
-                        var chunks = matches[i].split('|')
+                        var chunks = matches[i].replace("}}", "").split('|') //dat workaround..
+
                         for(var n=0; n<chunks.length; n++){
                             if(chunks[n].indexOf('=') > -1){
                                 var tmp = chunks[n].split('=', 2)
@@ -480,17 +482,6 @@ ApplicationWindow
                     {
                         var gameArr = lineArray[i].split(",");
                         barclaysUpcoming.premierArray.push(gameArr);
-                        barclaysUpcoming.append({
-                            "date":gameArr[0],
-                            "name_a":gameArr[1],
-                            "name_b":gameArr[2],
-
-                            "logox_a":premierModel.teamImgCord[gameArr[1]][0],
-                            "logoy_a":premierModel.teamImgCord[gameArr[1]][1],
-                            "logox_b":premierModel.teamImgCord[gameArr[2]][0],
-                            "logoy_b":premierModel.teamImgCord[gameArr[2]][1],
-
-                        })
                     }
                     var date = new Date();
                     var month = date.getMonth()+1;
@@ -508,8 +499,9 @@ ApplicationWindow
                             barclaysUpcoming.coverarray.push(gameDate[0]+"/"+gameDate[1]+"/2014");//purkka
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][1]);
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][2]);
-                            for(var a=0; a < 20;a++)
-                                next20games.push(barclaysUpcoming[i+a])
+                            for(var a=0; a < 20;a++){
+                                next20games.push(barclaysUpcoming.premierArray[i+a])
+                            }
                             found = true;
                         }
                         if(found)
