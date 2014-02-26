@@ -317,6 +317,17 @@ ApplicationWindow
                     {
                         var gameArr = lineArray[i].split(",");
                         barclaysUpcoming.bundesArray.push(gameArr);
+                        barclaysUpcoming.append({
+                            "date":gameArr[0],
+                            "name_a":gameArr[1],
+                            "name_b":gameArr[2],
+
+                            "logox_a":premierModel.teamImgCord[gameArr[1]][0],
+                            "logoy_a":premierModel.teamImgCord[gameArr[1]][1],
+                            "logox_b":premierModel.teamImgCord[gameArr[2]][0],
+                            "logoy_b":premierModel.teamImgCord[gameArr[2]][1],
+
+                        })
                     }
                     var date = new Date();
                     var month = date.getMonth()+1;

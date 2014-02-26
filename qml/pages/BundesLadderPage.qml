@@ -7,7 +7,7 @@ Page {
     property int resizeVal : 2
     SilicaListView {
         id: listView
-        model: teamModelb.teamCount
+        model: barclaysUpcoming.bundesArray.length
         anchors.fill: parent
         header: PageHeader {
             title: "Nested Page"

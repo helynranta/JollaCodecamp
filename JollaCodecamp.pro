@@ -25,5 +25,6 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     qml/pages/PremierPastPage.qml \
     qml/pages/PremierPastDetailPage.qml \
     qml/pages/BundesLadderPage.qml \
-    qml/pages/PremierLadderPage.qml
+    qml/pages/PremierLadderPage.qml \
+    qml/pages/PremierUpcomingPage.qml
 

@@ -8,7 +8,7 @@ Page {
     property int resizeVal : 2
     SilicaListView {
         id: listView
-        model: teamModel.teamCount
+        model: premierModel.teamCount
         anchors.fill: parent
         header: PageHeader {
             title: "Nested Page"
@@ -25,8 +25,8 @@ Page {
                     width: 195/resizeVal
                     height: 195/resizeVal
                     Image {
-                        x: teamModel.get(index).logox/resizeVal
-                        y: teamModel.get(index).logoy/resizeVal
+                        x: premierModel.get(index).logox/resizeVal
+                        y: premierModel.get(index).logoy/resizeVal
                         width: 1365/resizeVal
                         height: 1024/resizeVal
                         source: "../img/barclays_teams_logos.png"
@@ -35,15 +35,15 @@ Page {
                 Text
                 {
                     x: 100
-                    text: teamModel.get(index).position + ". " + teamModel.get(index).name
-                    font.pixelSize: Theme.fontSizeLarge
+                    text: premierModel.get(index).position + ". " + premierModel.get(index).name
+                    font.pixelSize: 0
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
                 Text
                 {
                     x: 100
                     y: 50
-                    text:"Won: "+teamModel.get(index).won + " Drawn: " + teamModel.get(index).drawn + " Lost: " + teamModel.get(index).lost
+                    text:"Won: "+premierModel.get(index).won + " Drawn: " + premierModel.get(index).drawn + " Lost: " + premierModel.get(index).lost
                     font.pixelSize: Theme.fontSizeMedium
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -51,7 +51,7 @@ Page {
                 {
                     x: 100
                     y: 80
-                    text:"Goals Against: "+teamModel.get(index).goalsAgainst + " GoalsFor: " + teamModel.get(index).goalsFor
+                    text:"Goals Against: "+premierModel.get(index).goalsAgainst + " GoalsFor: " + premierModel.get(index).goalsFor
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
