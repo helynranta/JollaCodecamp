@@ -131,10 +131,10 @@ ApplicationWindow
                     stringArray = text.split("\n");
                     text = "";
                     var arrayLength = stringArray.length;
-                    for(var i = 1; i < arrayLength; i++)
+                    for(var i = 1; i < arrayLength-1; i++) //last line is empty
                     {
                         var tempSplit = stringArray[i].split(",");
-                        parseData.push(tempSplit);
+                        parseData.unshift(tempSplit); //insert as first
                         //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
                     }
                 }

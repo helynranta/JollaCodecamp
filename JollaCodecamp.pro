@@ -24,5 +24,6 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     qml/pages/WikipediaSearch.qml \
     qml/pages/MainMenu.qml \
     qml/pages/PremierPastPage.qml \
-    qml/pages/ThirdPage.qml
+    qml/pages/ThirdPage.qml \
+    qml/pages/PremierPastDetailPage.qml
 

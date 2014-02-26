@@ -45,7 +45,6 @@ Page {
         delegate: BackgroundItem {
             id: delegate
             height: Theme.listItemSmall
-            anchors.verticalCenter: verticalCenter
 
             Text
             {
@@ -62,7 +61,9 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-            onClicked: console.log("Clicked " + index)
+            onClicked: {
+                pageStack.push( Qt.resolvedUrl("PremierPastDetailPage.qml"), {theIndex: index});
+            }
         }
         VerticalScrollDecorator { flickable: listView }
     }
