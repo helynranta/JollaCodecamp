@@ -58,12 +58,12 @@ Page {
             }
 
             ListElement {
-                name: "Bundesliga League Ladder"
+                name: "Bundesliga Ladder"
                 page:"BundesLadderPage"
             }
 
             ListElement {
-                name: "La Liga League Ladder"
+                name: "La Liga Ladder"
                 page:"LaligaLadderPage"
             }
        }

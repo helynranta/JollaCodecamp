@@ -11,7 +11,7 @@ Page {
         model: premierModel.teamCount
         anchors.fill: parent
         header: PageHeader {
-            title: "Nested Page"
+            title: "Premier League Ladder"
         }
 
         delegate: BackgroundItem {

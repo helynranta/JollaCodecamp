@@ -10,7 +10,7 @@ Page {
         model: bundesligaModel.teamCount
         anchors.fill: parent
         header: PageHeader {
-            title: "Nested Page"
+            title: "La Liga Ladder"
         }
 
         delegate: BackgroundItem {
