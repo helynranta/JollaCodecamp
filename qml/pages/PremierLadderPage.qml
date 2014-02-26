@@ -11,11 +11,7 @@ Page {
         model: premierModel.teamCount
         anchors.fill: parent
         header: PageHeader {
-<<<<<<< HEAD
-            title: "Premier League"
-=======
-            title: "Premier League Ladder"
->>>>>>> d1b5ece442a5774f0b26d77a3f22fbd2eb71cef6
+        title: "Premier League Ladder"
         }
 
         delegate: BackgroundItem {
