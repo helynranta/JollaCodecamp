@@ -34,7 +34,8 @@ import Sailfish.Silica 1.0
 Page {
     SilicaListView {
         id: mainMenuView
-        anchors.fill: parent
+        height: 500
+        width: parent.width
         header: PageHeader {
             title: "Fütböll Gibestive"
         }
@@ -94,5 +95,18 @@ Page {
            onClicked: pageStack.push(Qt.resolvedUrl(page+".qml"))
        }
        VerticalScrollDecorator { flickable: listView }
+    }
+
+    Label{
+        x: Theme.paddingLarge
+        y: 500
+        color: Theme.secondaryColor
+        text: "Select a league from the menu for"
+    }
+    Label{
+        x: Theme.paddingLarge
+        y: 540
+        color: Theme.secondaryColor
+        text: "ladder and upcoming and past games"
     }
 }
