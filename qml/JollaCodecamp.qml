@@ -252,6 +252,7 @@ ApplicationWindow
 
                         }
                     }
+
                 }
             }
         ListElement
@@ -443,7 +444,7 @@ ApplicationWindow
                             bundesUpcoming.coverarray.push(bundesUpcoming.bundesArray[i][1]);
                             bundesUpcoming.coverarray.push(bundesUpcoming.bundesArray[i][2]);
                             for(var a=0; a < 20;a++)
-                                next20games.push(bundesUpcoming[i+a])
+                                bundesUpcoming.next20games.push(bundesUpcoming.bundesArray[i+a])
                             found = true;
                         }
                         if(found)
@@ -506,7 +507,7 @@ ApplicationWindow
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][1]);
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][2]);
                             for(var a=0; a < 20;a++){
-                                next20games.push(barclaysUpcoming.premierArray[i+a])
+                                barclaysUpcoming.next20games.push(barclaysUpcoming.premierArray[i+a])
                             }
                             found = true;
                         }

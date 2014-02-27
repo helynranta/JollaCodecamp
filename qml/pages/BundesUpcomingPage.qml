@@ -11,7 +11,7 @@ Page {
         model: 20
         anchors.fill: parent
         header: PageHeader {
-            title: "Premier League Upcoming"
+            title: "Bundesliga Upcoming"
         }
 
         delegate: BackgroundItem {
@@ -25,11 +25,11 @@ Page {
                         width: 195/resizeVal
                         height: 195/resizeVal
                         Image {
-                            x: premierModel.teamImgCord[barclaysUpcoming.next20games[index][1]][0]/resizeVal
-                            y: premierModel.teamImgCord[barclaysUpcoming.next20games[index][1]][1]/resizeVal
-                            width: 1365/resizeVal
-                            height: 1024/resizeVal
-                            source: "../img/barclays_teams_logos.png"
+                            x: bundesligaModel.teamImgCord[bundesUpcoming.next20games[index][1]][0]/resizeVal
+                            y: bundesligaModel.teamImgCord[bundesUpcoming.next20games[index][1]][1]/resizeVal
+                            width: 1287/resizeVal
+                            height: 608/resizeVal
+                            source: "../img/bundesliga_teams_logos.png"
                         }
                     }
                 }
@@ -41,18 +41,18 @@ Page {
                         width: 195/resizeVal
                         height: 195/resizeVal
                         Image {
-                            x: premierModel.teamImgCord[barclaysUpcoming.next20games[index][2]][0]/resizeVal
-                            y: premierModel.teamImgCord[barclaysUpcoming.next20games[index][2]][1]/resizeVal
-                            width: 1365/resizeVal
-                            height: 1024/resizeVal
-                            source: "../img/barclays_teams_logos.png"
+                            x: bundesligaModel.teamImgCord[bundesUpcoming.next20games[index][2]][0]/resizeVal
+                            y: bundesligaModel.teamImgCord[bundesUpcoming.next20games[index][2]][1]/resizeVal
+                            width: 1287/resizeVal
+                            height: 608/resizeVal
+                            source: "../img/bundesliga_teams_logos.png"
                         }
                     }
                 }
                 Column{
                     Text
                     {
-                        text: barclaysUpcoming.next20games[index][1]
+                        text: bundesUpcoming.next20games[index][1]
                         font.pixelSize: Theme.fontSizeSmall
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     }
@@ -60,14 +60,14 @@ Page {
                     {
                         y: 30
 
-                        text: barclaysUpcoming.next20games[index][2]
+                        text: bundesUpcoming.next20games[index][2]
                         font.pixelSize: Theme.fontSizeSmall
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     }
                     Text
                     {
                         y: 60
-                        text: barclaysUpcoming.next20games[index][0]
+                        text: bundesUpcoming.next20games[index][0]
                         font.pixelSize: Theme.fontSizeSmall
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                     }
