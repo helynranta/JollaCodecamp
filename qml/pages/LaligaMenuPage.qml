@@ -46,10 +46,10 @@ Page {
                 page:"LadderPage"
             }
 
-            /*ListElement {
+            ListElement {
                 name: "Upcoming games"
                 page:"UpcomingPage"
-            }*/
+            }
 
             ListElement {
                 name: "Past games"
@@ -68,7 +68,7 @@ Page {
        VerticalScrollDecorator { flickable: listView }
     }
 
-    /*Label{
+    Label{
         x: Theme.paddingLarge
         y: 500
         color: Theme.secondaryColor
@@ -81,7 +81,6 @@ Page {
         color: Theme.secondaryColor
         text: laligaUpcoming.next20games[0][1] +" vs "+ laligaUpcoming.next20games[0][2]
     }
-    */
     Label{
         x: Theme.paddingLarge
         y: 600

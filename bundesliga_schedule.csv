@@ -6,11 +6,11 @@
 8/3/24,Stuttgart,Braunschweig
 8/3/24,Nürnberg,Werder Bremen
 9/3/24,Freiburg,Borussia Dortmund
-9/3/24,Mainz,Hertha
+9/3/24,Mainz,Hertha BSC
 14/3/25,Augsburg,Schalke 04
 15/3/25,Braunschweig,VfL Wolfsburg
 15/3/25,Borussia Dortmund,Mönchengladbach
-15/3/25,Hertha,Hannover 96
+15/3/25,Hertha BSC,Hannover 96
 15/3/25,Werder Bremen,Stuttgart
 15/3/25,Hoffenheim,Mainz
 15/3/25,Bayern Munich,Leverkusen
@@ -22,19 +22,19 @@
 22/3/26,Schalke 04,Braunschweig
 22/3/26,Mainz,Bayern Munich
 22/3/26,Stuttgart,Hamburg
-22/3/26,Mönchengladbach,Hertha
+22/3/26,Mönchengladbach,Hertha BSC
 23/3/26,Nürnberg,Eintracht Frankfurt
 23/3/26,Leverkusen,Hoffenheim
 25/3/27,Werder Bremen,VfL Wolfsburg
 25/3/27,Braunschweig,Mainz
-25/3/27,Hertha,Bayern Munich
+25/3/27,Hertha BSC,Bayern Munich
 25/3/27,Borussia Dortmund,Schalke 04
 26/3/27,Nürnberg,Stuttgart
 26/3/27,Eintracht Frankfurt,Mönchengladbach
 26/3/27,Hoffenheim,Hannover 96
 26/3/27,Augsburg,Leverkusen
 26/3/27,Hamburg,Freiburg
-28/3/28,Schalke 04,Hertha
+28/3/28,Schalke 04,Hertha BSC
 29/3/28,Leverkusen,Braunschweig
 29/3/28,Stuttgart,Borussia Dortmund
 29/3/28,VfL Wolfsburg,Eintracht Frankfurt
@@ -45,7 +45,7 @@
 30/3/28,Hannover 96,Werder Bremen
 5/4/29,Eintracht Frankfurt,Mainz
 5/4/29,Stuttgart,Freiburg
-5/4/29,Hertha,Hoffenheim
+5/4/29,Hertha BSC,Hoffenheim
 5/4/29,Werder Bremen,Schalke 04
 5/4/29,Nürnberg,Mönchengladbach
 5/4/29,Augsburg,Bayern Munich
@@ -60,12 +60,12 @@
 12/4/30,Schalke 04,Eintracht Frankfurt
 12/4/30,Mainz,Werder Bremen
 12/4/30,Mönchengladbach,Stuttgart
-12/4/30,Leverkusen,Hertha
+12/4/30,Leverkusen,Hertha BSC
 19/4/31,Eintracht Frankfurt,Hannover 96
 19/4/31,Werder Bremen,Hoffenheim
 19/4/31,Nürnberg,Leverkusen
 19/4/31,Freiburg,Mönchengladbach
-19/4/31,Augsburg,Hertha
+19/4/31,Augsburg,Hertha BSC
 19/4/31,Hamburg,VfL Wolfsburg
 19/4/31,Borussia Dortmund,Mainz
 19/4/31,Braunschweig,Bayern Munich
@@ -75,11 +75,11 @@
 26/4/32,Bayern Munich,Werder Bremen
 26/4/32,Augsburg,Hamburg
 26/4/32,Schalke 04,Mönchengladbach
-26/4/32,Hertha,Braunschweig
+26/4/32,Hertha BSC,Braunschweig
 26/4/32,Leverkusen,Borussia Dortmund
 26/4/32,Hannover 96,Stuttgart
 26/4/32,VfL Wolfsburg,Freiburg
-3/5/33,Werder Bremen,Hertha
+3/5/33,Werder Bremen,Hertha BSC
 3/5/33,Nürnberg,Hannover 96
 3/5/33,Freiburg,Schalke 04
 3/5/33,Hamburg,Bayern Munich
@@ -91,7 +91,7 @@
 10/5/34,Bayern Munich,Stuttgart
 10/5/34,Augsburg,Eintracht Frankfurt
 10/5/34,Schalke 04,Nürnberg
-10/5/34,Hertha,Borussia Dortmund
+10/5/34,Hertha BSC,Borussia Dortmund
 10/5/34,Leverkusen,Werder Bremen
 10/5/34,Hannover 96,Freiburg
 10/5/34,VfL Wolfsburg,Mönchengladbach

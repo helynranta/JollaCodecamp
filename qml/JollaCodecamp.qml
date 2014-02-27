@@ -461,6 +461,66 @@ ApplicationWindow
         }
     }
     /**************************
+     laliga upcoming games
+    ***************************/
+    ListModel
+    {
+        id : laligaUpcoming
+        property var laligaArray : []
+        property string covertext : "Cover"
+        property var coverarray : []
+        property var next20games : []
+
+        Component.onCompleted:
+        {
+            var xhr = new XMLHttpRequest;
+            xhr.open("GET", "http://koti.mbnet.fi/lasshi/opendata/laliga_schedule.csv", true);
+            xhr.send();
+            xhr.onreadystatechange = function()
+            {
+                if(xhr.readyState == XMLHttpRequest.DONE)
+                {
+                    var lineArray = xhr.responseText.split("\n");
+                    var lineLenght = lineArray.length;
+                    for(var i = 0; i < lineLenght; i++)
+                    {
+                        var gameArr = lineArray[i].split(",");
+                        laligaUpcoming.laligaArray.push(gameArr);
+                    }
+                    var date = new Date();
+                    var month = date.getMonth()+1;
+                    var day = date.getDate();
+                    var year = date.getFullYear();
+
+                    var found = false
+                    var listLen = laligaUpcoming.laligaArray.length
+                    for(var i = 0; i < listLen; i++)
+                    {
+                        var gameDate = laligaUpcoming.laligaArray[i][0].split("/")
+                        console.log(gameDate[0]+"/"+gameDate[1]+"/"+gameDate[2]);
+                        if(((gameDate[0]>day && gameDate[1]==month)|| gameDate[1] > month))
+                        {
+                            laligaUpcoming.coverarray.push(gameDate[0]+"/"+gameDate[1]+"/2014");
+                            laligaUpcoming.coverarray.push(laligaUpcoming.laligaArray[i][1]);
+                            laligaUpcoming.coverarray.push(laligaUpcoming.laligaArray[i][2]);
+                            for(var a=0; a < 20;a++)
+                                laligaUpcoming.next20games.push(laligaUpcoming.laligaArray[i+a])
+                            found = true;
+                        }
+                        if(found)
+                            break;
+                    }
+                    coverItems.imgSizex = 1287;
+                    coverItems.imgSizey = 608;
+                    coverItems.imgSource = "img/bundesliga_teams_logos.png";
+                    coverItems.covertext = laligaUpcoming.coverarray[0];
+                    coverItems.imgArray = laligaUpcoming.teamImgCord;
+                    coverItems.teamArray = laligaUpcoming.next20games;
+                }
+            }
+        }
+    }
+    /**************************
      premier upcoming games
     ***************************/
     ListModel
@@ -630,6 +690,20 @@ ApplicationWindow
                 CoverAction
                 {
                     iconSource: "img/barclays_logo.png"
+
+                    onTriggered:
+                    {
+                        coverItems.imgSizex = 1365;
+                        coverItems.imgSizey =  1024;
+                        coverItems.imgSource = "img/barclays_teams_logos.png";
+                        coverItems.covertext = barclaysUpcoming.coverarray[0];
+                        coverItems.imgArray = premierModel.teamImgCord;
+                        coverItems.teamArray = barclaysUpcoming.next20games;
+                    }
+                }
+                CoverAction
+                {
+                    iconSource: "img/l_logo.png"
 
                     onTriggered:
                     {
