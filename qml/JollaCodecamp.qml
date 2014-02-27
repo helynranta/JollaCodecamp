@@ -443,20 +443,18 @@ ApplicationWindow
                             bundesUpcoming.coverarray.push(bundesUpcoming.bundesArray[i][1]);
                             bundesUpcoming.coverarray.push(bundesUpcoming.bundesArray[i][2]);
                             for(var a=0; a < 20;a++)
-                                next20games.push(bundesUpcoming[i+a])
+                                bundesUpcoming.next20games.push(bundesUpcoming.bundesArray[i+a])
                             found = true;
                         }
                         if(found)
                             break;
                     }
-                    coverlabel.imgSizex = 1287;
-                    coverlabel.imgSizey = 608;
-                    coverlabel.imgSource = "img/bundesliga_teams_logos.png";
-                    coverlabel.covertext = bundesUpcoming.coverarray[0];
-                    coverlabel.logo1x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][0]/coverlabel.resizeVal
-                    coverlabel.logo1y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][1]/coverlabel.resizeVal
-                    coverlabel.logo2x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][0]/coverlabel.resizeVal
-                    coverlabel.logo2y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][1]/coverlabel.resizeVal
+                    coverItems.imgSizex = 1287;
+                    coverItems.imgSizey = 608;
+                    coverItems.imgSource = "img/bundesliga_teams_logos.png";
+                    coverItems.covertext = bundesUpcoming.coverarray[0];
+                    coverItems.imgArray = bundesligaModel.teamImgCord;
+                    coverItems.teamArray = bundesUpcoming.next20games;
                 }
             }
         }
@@ -506,7 +504,7 @@ ApplicationWindow
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][1]);
                             barclaysUpcoming.coverarray.push(barclaysUpcoming.premierArray[i][2]);
                             for(var a=0; a < 20;a++){
-                                next20games.push(barclaysUpcoming.premierArray[i+a])
+                                barclaysUpcoming.next20games.push(barclaysUpcoming.premierArray[i+a])
                             }
                             found = true;
                         }
@@ -518,95 +516,95 @@ ApplicationWindow
         }
     }
 
-    initialPage: Component { MainMenu2 { } }
+    initialPage: Component { MainMenu { } }
 
     /*
       COVER CODE BLES
       */
     cover:
         CoverBackground {
-            Label
+            Text
             {
-                id : coverlabel
-                height: 400
-                width: 200
-                property string covertext : "Swipe right to Bundes\nand left for Premier upcoming"
-                property string logo1x : ""
-                property string logo1y : ""
-                property string logo2x : ""
-                property string logo2y : ""
+                text: "Upcoming games:"
+                //anchors.centerIn: parent
+                color: Theme.primaryColor
+                font.pixelSize: Theme.fontSizeExtraSmall
+            }
+            ListView
+            {
+                id: coverItems
+                anchors.fill: parent
+                model: 10
+                property string covertext : "Cover"
+                property double imgSizex : 0
+                property double imgSizey : 0
                 property string imgSource : "img/barclays_teams_logos.png"
                 property double resizeVal : 2.5
-                property double imgSizex : 100
-                property double imgSizey : 100
+                property var imgArray : ({})
+                property var teamArray : []
 
-                Text
+                delegate: BackgroundItem
                 {
-                    text: "Upcoming games:\n\n\n\n\n\n\n"
-                    anchors.centerIn: parent
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                }
-                Text
-                {
-                    text:coverlabel.covertext +  "\n\n\n"
-                    anchors.centerIn: parent
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeSmall
-                }
-
-                Rectangle{
-                    id : logo1
-                    color :"transparent"
-                    clip: true
-                    x: 20
-                    SequentialAnimation on y {
-                                id: coverxnaim1
-                                // Animations on properties start running by default
-                                running: true
-                                loops: Animation.Infinite // The animation is set to loop indefinitely
-                                NumberAnimation { from: 300; to: 100; duration: 1000; easing.type: Easing.InOutQuad }
-                                NumberAnimation { from: 100; to: 300; duration: 0; easing.type: Easing.InOutQuad }
-                    }
-                    width: 195/coverlabel.resizeVal
-                    height: 195/coverlabel.resizeVal
-                    Image {
-                        id: coverteam1logo
-                        x: coverlabel.logo1x
-                        y: coverlabel.logo1y
-                        width: coverlabel.imgSizex/coverlabel.resizeVal
-                        height: coverlabel.imgSizey/coverlabel.resizeVal
-                        source: coverlabel.imgSource
-                        SequentialAnimation on opacity {
-                                    id: coveropacitynaim1
-                                    // Animations on properties start running by default
-                                    running: true
-                                    loops: Animation.Infinite // The animation is set to loop indefinitely
-                                    NumberAnimation { from: 0; to: 0; duration: 100; easing.type: Easing.InOutQuad }
-                                    NumberAnimation { from: 0; to: 1; duration: 600; easing.type: Easing.InOutQuad }
-                                    NumberAnimation { from: 1; to: 0; duration: 300; easing.type: Easing.InOutQuad }
+                    id: delegate
+                    Label
+                    {
+                        id : coverlabel
+                        anchors.fill:parent
+                        Rectangle{
+                            id : logo1
+                            color :"transparent"
+                            clip: true
+                            x: 20
+                            SequentialAnimation on y {
+                                        id: coverxnaim1
+                                        // Animations on properties start running by default
+                                        running: true
+                                        loops: Animation.Infinite // The animation is set to loop indefinitely
+                                        NumberAnimation { from: 400; to: -400; duration: 10000;}
+                                        NumberAnimation { from: -400; to: 400; duration: 0; }
+                            }
+                            width: 195/coverItems.resizeVal
+                            height: 195/coverItems.resizeVal
+                            Image {
+                                id: coverteam1logo
+                                x: coverItems.imgArray[coverItems.teamArray[index][1]][0]/coverItems.resizeVal
+                                y: coverItems.imgArray[coverItems.teamArray[index][1]][1]/coverItems.resizeVal
+                                width: coverItems.imgSizex/coverItems.resizeVal
+                                height: coverItems.imgSizey/coverItems.resizeVal
+                                source: coverItems.imgSource
+                                /*SequentialAnimation on opacity {
+                                            id: coveropacitynaim1
+                                            // Animations on properties start running by default
+                                            running: true
+                                            loops: Animation.Infinite // The animation is set to loop indefinitely
+                                            NumberAnimation { from: 0; to: 0; duration: 4000-index*400; easing.type: Easing.InOutQuad }
+                                            NumberAnimation { from: 0; to: 1; duration: 1000; easing.type: Easing.InOutQuad }
+                                            NumberAnimation { from: 1; to: 0; duration: 1000; easing.type: Easing.InOutQuad }
+                                            NumberAnimation { from: 0; to: 0; duration: 4000+index*400; easing.type: Easing.InOutQuad }
+                                }*/
+                            }
                         }
+                        Rectangle
+                        {
+                             color :"transparent"
+                             clip: true
+                             x: 140
+                             y: logo1.y
+                             width: 195/coverItems.resizeVal
+                             height: 195/coverItems.resizeVal
+                             Image {
+                                 id: coverteam2logo
+                                 x: coverItems.imgArray[coverItems.teamArray[index][2]][0]/coverItems.resizeVal
+                                 y: coverItems.imgArray[coverItems.teamArray[index][2]][1]/coverItems.resizeVal
+                                 opacity: coverteam1logo.opacity
+                                 width: coverItems.imgSizex/coverItems.resizeVal
+                                 height: coverItems.imgSizey/coverItems.resizeVal
+                                 source: coverItems.imgSource
+                             }
+                         }
                     }
                 }
-                Rectangle
-                {
-                     color :"transparent"
-                     clip: true
-                     anchors.verticalCenter: parent
-                     x: 140
-                     y: logo1.y
-                     width: 195/coverlabel.resizeVal
-                     height: 195/coverlabel.resizeVal
-                     Image {
-                         id: coverteam2logo
-                         x: coverlabel.logo2x
-                         y: coverlabel.logo2y
-                         opacity: coverteam1logo.opacity
-                         width: coverlabel.imgSizex/coverlabel.resizeVal
-                         height: coverlabel.imgSizey/coverlabel.resizeVal
-                         source: coverlabel.imgSource
-                     }
-                 }
+                VerticalScrollDecorator { flickable: coverItems }
 
             }
 
@@ -619,14 +617,12 @@ ApplicationWindow
 
                     onTriggered:
                     {
-                        coverlabel.imgSizex = 1287;
-                        coverlabel.imgSizey = 608;
-                        coverlabel.imgSource = "img/bundesliga_teams_logos.png";
-                        coverlabel.covertext = bundesUpcoming.coverarray[0];
-                        coverlabel.logo1x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][0]/coverlabel.resizeVal
-                        coverlabel.logo1y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][1]/coverlabel.resizeVal
-                        coverlabel.logo2x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][0]/coverlabel.resizeVal
-                        coverlabel.logo2y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][1]/coverlabel.resizeVal
+                        coverItems.imgSizex = 1287;
+                        coverItems.imgSizey = 608;
+                        coverItems.imgSource = "img/bundesliga_teams_logos.png";
+                        coverItems.covertext = bundesUpcoming.coverarray[0];
+                        coverItems.imgArray = bundesligaModel.teamImgCord;
+                        coverItems.teamArray = bundesUpcoming.next20games;
                     }
                 }
 
@@ -636,14 +632,12 @@ ApplicationWindow
 
                     onTriggered:
                     {
-                        coverlabel.imgSizex = 1365;
-                        coverlabel.imgSizey =  1024;
-                        coverlabel.imgSource = "img/barclays_teams_logos.png";
-                        coverlabel.covertext = barclaysUpcoming.coverarray[0];
-                        coverlabel.logo1x = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][0]/coverlabel.resizeVal
-                        coverlabel.logo1y = premierModel.teamImgCord[barclaysUpcoming.coverarray[1]][1]/coverlabel.resizeVal
-                        coverlabel.logo2x = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][0]/coverlabel.resizeVal
-                        coverlabel.logo2y = premierModel.teamImgCord[barclaysUpcoming.coverarray[2]][1]/coverlabel.resizeVal
+                        coverItems.imgSizex = 1365;
+                        coverItems.imgSizey =  1024;
+                        coverItems.imgSource = "img/barclays_teams_logos.png";
+                        coverItems.covertext = barclaysUpcoming.coverarray[0];
+                        coverItems.imgArray = premierModel.teamImgCord;
+                        coverItems.teamArray = barclaysUpcoming.next20games;
                     }
                 }
             }
