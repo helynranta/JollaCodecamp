@@ -12,6 +12,17 @@ Page {
         header: PageHeader {
         title: "Bundesliga Ladder"
         }
+        PullDownMenu
+        {
+            MenuItem {
+                text: "Past Games"
+                onClicked: pageStack.push(Qt.resolvedUrl("BundesPastPage.qml"))
+            }
+            MenuItem {
+                text: "Upcoming Games"
+                onClicked: pageStack.push(Qt.resolvedUrl("BundesUpcomingPage.qml"))
+            }
+        }
 
         delegate: BackgroundItem {
             id: delegate

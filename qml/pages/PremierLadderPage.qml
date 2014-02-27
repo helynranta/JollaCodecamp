@@ -13,6 +13,17 @@ Page {
         header: PageHeader {
         title: "Premier League Ladder"
         }
+        PullDownMenu
+        {
+            MenuItem {
+                text: "Past Games"
+                onClicked: pageStack.push(Qt.resolvedUrl("PremierPastPage.qml"))
+            }
+            MenuItem {
+                text: "Upcoming Games"
+                onClicked: pageStack.push(Qt.resolvedUrl("PremierUpcomingPage.qml"))
+            }
+        }
 
         delegate: BackgroundItem {
             id: delegate

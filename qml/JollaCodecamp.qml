@@ -125,7 +125,7 @@ ApplicationWindow
         {
             text = "does it even work ffs";
             var xhr = new XMLHttpRequest;
-            xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/E1.csv", true);
+            xhr.open("GET", "http://www.football-data.co.uk/mmz4281/1314/E0.csv", true);
             xhr.send();
             xhr.onreadystatechange = function()
             {
@@ -410,6 +410,7 @@ ApplicationWindow
         property string covertext : "Cover"
         property var coverarray : []
         property var next20games : []
+        property string menutxt : ""
 
         Component.onCompleted:
         {
@@ -456,6 +457,10 @@ ApplicationWindow
                     coverItems.covertext = bundesUpcoming.coverarray[0];
                     coverItems.imgArray = bundesligaModel.teamImgCord;
                     coverItems.teamArray = bundesUpcoming.next20games;
+                    menutxt=""
+                    for(var n = 0; n < 20; n++)
+                        menutxt+="  "+bundesUpcoming.next20games[n][0]+" "+bundesUpcoming.next20games[n][1]+" vs "+bundesUpcoming.next20games[n][2];
+
                 }
             }
         }
@@ -470,6 +475,7 @@ ApplicationWindow
         property string covertext : "Cover"
         property var coverarray : []
         property var next20games : []
+        property string menutxt : "loading"
 
         Component.onCompleted:
         {
@@ -512,10 +518,13 @@ ApplicationWindow
                     }
                     coverItems.imgSizex = 1287;
                     coverItems.imgSizey = 608;
-                    coverItems.imgSource = "img/bundesliga_teams_logos.png";
+                    coverItems.imgSource = "img/laliga_teams_logos.png";
                     coverItems.covertext = laligaUpcoming.coverarray[0];
                     coverItems.imgArray = laligaUpcoming.teamImgCord;
                     coverItems.teamArray = laligaUpcoming.next20games;
+                    laligaUpcoming.menutxt = "";
+                    for(var n = 0; n < 20; n++)
+                        menutxt+="  "+laligaUpcoming.next20games[n][0]+" "+laligaUpcoming.next20games[n][1]+" vs "+laligaUpcoming.next20games[n][2];
                 }
             }
         }
@@ -529,6 +538,7 @@ ApplicationWindow
         property var premierArray : []
         property var next20games : []
         property var coverarray : []
+        property string menutxt : ""
 
         signal onCompleted();
 
@@ -572,6 +582,10 @@ ApplicationWindow
                         if(found)
                             break;
                     }
+                    menutxt=""
+                    for(var n = 0; n < 20; n++)
+                        menutxt+="  "+barclaysUpcoming.next20games[n][0]+" "+barclaysUpcoming.next20games[n][1]+" vs "+barclaysUpcoming.next20games[n][2];
+
                 }
             }
         }
@@ -584,18 +598,19 @@ ApplicationWindow
       */
     cover:
         CoverBackground {
-            Text
+            /*Text
             {
-                text: "Upcoming games:"
-                //anchors.centerIn: parent
+                text: "Upcoming\n  Games:"
+                anchors.centerIn: parent
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
             }
+            */
             ListView
             {
                 id: coverItems
                 anchors.fill: parent
-                model: 10
+                model: 5
                 property string covertext : "Cover"
                 property double imgSizex : 0
                 property double imgSizey : 0
@@ -633,16 +648,7 @@ ApplicationWindow
                                 width: coverItems.imgSizex/coverItems.resizeVal
                                 height: coverItems.imgSizey/coverItems.resizeVal
                                 source: coverItems.imgSource
-                                /*SequentialAnimation on opacity {
-                                            id: coveropacitynaim1
-                                            // Animations on properties start running by default
-                                            running: true
-                                            loops: Animation.Infinite // The animation is set to loop indefinitely
-                                            NumberAnimation { from: 0; to: 0; duration: 4000-index*400; easing.type: Easing.InOutQuad }
-                                            NumberAnimation { from: 0; to: 1; duration: 1000; easing.type: Easing.InOutQuad }
-                                            NumberAnimation { from: 1; to: 0; duration: 1000; easing.type: Easing.InOutQuad }
-                                            NumberAnimation { from: 0; to: 0; duration: 4000+index*400; easing.type: Easing.InOutQuad }
-                                }*/
+                                opacity: (parent.y + index*195/2.5)/100
                             }
                         }
                         Rectangle
@@ -663,6 +669,30 @@ ApplicationWindow
                                  source: coverItems.imgSource
                              }
                          }
+                        Text
+                        {
+                            text : "- VS -"
+                            x: 80
+                            y: logo1.y
+                            opacity: coverteam1logo.opacity
+                            font.bold: true;
+                            style: Text.Outline
+                            styleColor: "black"
+                            color: Theme.primaryColor
+                            font.pixelSize: Theme.fontSizeMedium
+                        }
+                        Text
+                        {
+                            text: coverItems.teamArray[index][0]
+                            font.bold: true;
+                            x: 60
+                            y: logo1.y+30
+                            style: Text.Outline
+                            styleColor: "black"
+                            opacity: coverteam1logo.opacity
+                            color: Theme.primaryColor
+                            font.pixelSize: Theme.fontSizeSmall
+                        }
                     }
                 }
                 VerticalScrollDecorator { flickable: coverItems }
@@ -690,20 +720,6 @@ ApplicationWindow
                 CoverAction
                 {
                     iconSource: "img/barclays_logo.png"
-
-                    onTriggered:
-                    {
-                        coverItems.imgSizex = 1365;
-                        coverItems.imgSizey =  1024;
-                        coverItems.imgSource = "img/barclays_teams_logos.png";
-                        coverItems.covertext = barclaysUpcoming.coverarray[0];
-                        coverItems.imgArray = premierModel.teamImgCord;
-                        coverItems.teamArray = barclaysUpcoming.next20games;
-                    }
-                }
-                CoverAction
-                {
-                    iconSource: "img/l_logo.png"
 
                     onTriggered:
                     {

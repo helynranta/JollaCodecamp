@@ -6,6 +6,18 @@ import Sailfish.Silica 1.0
 Page {
     property int resizeVal : 2
     SilicaListView {
+        PullDownMenu
+        {
+            MenuItem {
+                text: "Past Games"
+                onClicked: pageStack.push(Qt.resolvedUrl("LaligaPastPage.qml"))
+            }
+            MenuItem {
+                text: "Upcoming Games"
+                onClicked: pageStack.push(Qt.resolvedUrl("LaligaUpcomingPage.qml"))
+            }
+        }
+
         id: listView
         model: laligaModel.teamCount
         anchors.fill: parent

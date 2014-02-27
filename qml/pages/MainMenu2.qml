@@ -42,17 +42,17 @@ Page {
         model: ListModel {
             ListElement {
                 name: "Premier League"
-                page:"PremierMenuPage"
+                page:"PremierLadderPage"
                 imgSource:"../img/barclays_logo.png"
             }
             ListElement {
                 name: "Bundesliga"
-                page:"BundesMenuPage"
+                page:"BundesLadderPage"
                 imgSource:"../img/bundesliga_logo.png"
             }
             ListElement {
                 name: "La Liga"
-                page:"LaligaMenuPage"
+                page:"LaligaLadderPage"
                 imgSource:"../img/laliga_logo.png"
             }
        }
@@ -108,5 +108,68 @@ Page {
         y: 540
         color: Theme.secondaryColor
         text: "ladder and upcoming and past games"
+    }
+    Label{
+        x: Theme.paddingLarge
+        y: 600
+        color: Theme.secondaryColor
+        text: "Laliga BBVA Upcoming:"
+    }
+    Label{
+        id: laligaUPlabel
+        x: Theme.paddingLarge
+        y: 640
+        color: Theme.primaryColor
+        text: laligaUpcoming.menutxt
+        SequentialAnimation on x {
+                    id: menutextlaliga
+                    // Animations on properties start running by default
+                    running: true
+                    loops: Animation.Infinite // The animation is set to loop indefinitely
+                    NumberAnimation { from: 400; to: -10000; duration: 70000;}
+                    NumberAnimation { from: -10000; to: 400; duration: 0; }
+        }
+    }
+    Label{
+        x: Theme.paddingLarge
+        y: 680
+        color: Theme.secondaryColor
+        text: "Bundesliga Upcoming:"
+    }
+    Label{
+        id: bundesUPlabel
+        x: Theme.paddingLarge
+        y: 720
+        color: Theme.primaryColor
+        text: bundesUpcoming.menutxt
+        SequentialAnimation on x {
+                    id: menutextbundes
+                    // Animations on properties start running by default
+                    running: true
+                    loops: Animation.Infinite // The animation is set to loop indefinitely
+                    NumberAnimation { from: 400; to: -10000; duration: 70000;}
+                    NumberAnimation { from: -10000; to: 400; duration: 0; }
+        }
+    }
+    Label{
+        x: Theme.paddingLarge
+        y: 760
+        color: Theme.secondaryColor
+        text: "Premier Upcoming:"
+    }
+    Label{
+        id: premierUPlabel
+        x: Theme.paddingLarge
+        y: 800
+        color: Theme.primaryColor
+        text: barclaysUpcoming.menutxt
+        SequentialAnimation on x {
+                    id: menutextpremier
+                    // Animations on properties start running by default
+                    running: true
+                    loops: Animation.Infinite // The animation is set to loop indefinitely
+                    NumberAnimation { from: 400; to: -10000; duration: 70000;}
+                    NumberAnimation { from: -10000; to: 400; duration: 0; }
+        }
     }
 }
