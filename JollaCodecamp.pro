@@ -31,5 +31,6 @@ OTHER_FILES += qml/JollaCodecamp.qml \
     qml/pages/BundesPastDetailPage.qml \
     qml/pages/BundesPastPage.qml \
     qml/pages/LaligaPastPage.qml \
-    qml/pages/LaligaPastDetailPage.qml
+    qml/pages/LaligaPastDetailPage.qml \
+    qml/pages/MainMenu2.qml
 

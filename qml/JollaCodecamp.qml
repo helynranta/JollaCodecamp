@@ -140,7 +140,6 @@ ApplicationWindow
                     {
                         var tempSplit = stringArray[i].split(",");
                         parseData.unshift(tempSplit); //insert as first
-                        //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
                     }
                 }
             }
@@ -250,7 +249,7 @@ ApplicationWindow
                         {
                             var tempSplit = stringArray[i].split(",");
                             parseData.unshift(tempSplit); //insert as first
-                            //text += tempSplit[2] + " vs " + tempSplit[3] + "\n";
+
                         }
                     }
                 }
@@ -402,7 +401,6 @@ ApplicationWindow
 
     /**************************
      bundesliga upcoming games
-     fetches data from lasshi's server
     ***************************/
     ListModel
     {
@@ -451,6 +449,14 @@ ApplicationWindow
                         if(found)
                             break;
                     }
+                    coverlabel.imgSizex = 1287;
+                    coverlabel.imgSizey = 608;
+                    coverlabel.imgSource = "img/bundesliga_teams_logos.png";
+                    coverlabel.covertext = bundesUpcoming.coverarray[0];
+                    coverlabel.logo1x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][0]/coverlabel.resizeVal
+                    coverlabel.logo1y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][1]/coverlabel.resizeVal
+                    coverlabel.logo2x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][0]/coverlabel.resizeVal
+                    coverlabel.logo2y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][1]/coverlabel.resizeVal
                 }
             }
         }
@@ -512,7 +518,7 @@ ApplicationWindow
         }
     }
 
-    initialPage: Component { MainMenu { } }
+    initialPage: Component { MainMenu2 { } }
 
     /*
       COVER CODE BLES
@@ -550,10 +556,18 @@ ApplicationWindow
                 }
 
                 Rectangle{
+                    id : logo1
                     color :"transparent"
                     clip: true
                     x: 20
-                    y: 200
+                    SequentialAnimation on y {
+                                id: coverxnaim1
+                                // Animations on properties start running by default
+                                running: true
+                                loops: Animation.Infinite // The animation is set to loop indefinitely
+                                NumberAnimation { from: 300; to: 100; duration: 1000; easing.type: Easing.InOutQuad }
+                                NumberAnimation { from: 100; to: 300; duration: 0; easing.type: Easing.InOutQuad }
+                    }
                     width: 195/coverlabel.resizeVal
                     height: 195/coverlabel.resizeVal
                     Image {
@@ -563,6 +577,15 @@ ApplicationWindow
                         width: coverlabel.imgSizex/coverlabel.resizeVal
                         height: coverlabel.imgSizey/coverlabel.resizeVal
                         source: coverlabel.imgSource
+                        SequentialAnimation on opacity {
+                                    id: coveropacitynaim1
+                                    // Animations on properties start running by default
+                                    running: true
+                                    loops: Animation.Infinite // The animation is set to loop indefinitely
+                                    NumberAnimation { from: 0; to: 0; duration: 100; easing.type: Easing.InOutQuad }
+                                    NumberAnimation { from: 0; to: 1; duration: 600; easing.type: Easing.InOutQuad }
+                                    NumberAnimation { from: 1; to: 0; duration: 300; easing.type: Easing.InOutQuad }
+                        }
                     }
                 }
                 Rectangle
@@ -571,13 +594,14 @@ ApplicationWindow
                      clip: true
                      anchors.verticalCenter: parent
                      x: 140
-                     y: 200
+                     y: logo1.y
                      width: 195/coverlabel.resizeVal
                      height: 195/coverlabel.resizeVal
                      Image {
                          id: coverteam2logo
                          x: coverlabel.logo2x
                          y: coverlabel.logo2y
+                         opacity: coverteam1logo.opacity
                          width: coverlabel.imgSizex/coverlabel.resizeVal
                          height: coverlabel.imgSizey/coverlabel.resizeVal
                          source: coverlabel.imgSource
@@ -591,7 +615,7 @@ ApplicationWindow
 
                 CoverAction
                 {
-                    iconSource: "image://theme/icon-cover-pause"
+                    iconSource: "img/bundesliga_logo.png"
 
                     onTriggered:
                     {
@@ -603,13 +627,12 @@ ApplicationWindow
                         coverlabel.logo1y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[1]][1]/coverlabel.resizeVal
                         coverlabel.logo2x = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][0]/coverlabel.resizeVal
                         coverlabel.logo2y = bundesligaModel.teamImgCord[bundesUpcoming.coverarray[2]][1]/coverlabel.resizeVal
-                        console.log(bundesUpcoming.coverarray[1]);
                     }
                 }
 
                 CoverAction
                 {
-                    iconSource: "image://theme/icon-cover-pause"
+                    iconSource: "img/barclays_logo.png"
 
                     onTriggered:
                     {
