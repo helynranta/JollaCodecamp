@@ -9,7 +9,7 @@ Page {
     SilicaListView {
         id: listView
         model: 20
-        anchors.fill: parent
+        //anchors.fill: parent
         header: PageHeader {
             title: "Premier League Upcoming"
         }
