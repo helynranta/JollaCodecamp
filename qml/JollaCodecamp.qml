@@ -252,6 +252,7 @@ ApplicationWindow
 
                         }
                     }
+
                 }
             }
         ListElement
@@ -516,7 +517,7 @@ ApplicationWindow
         }
     }
 
-    initialPage: Component { MainMenu { } }
+    initialPage: Component { MainMenu2 { } }
 
     /*
       COVER CODE BLES

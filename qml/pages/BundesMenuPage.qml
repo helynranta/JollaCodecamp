@@ -34,65 +34,65 @@ import Sailfish.Silica 1.0
 Page {
     SilicaListView {
         id: mainMenuView
-        anchors.fill: parent
+        height: 500
+        width: parent.width
         header: PageHeader {
-            title: "Fütböll Gibestive"
+            title: "Bundesliga"
         }
+
         model: ListModel {
             ListElement {
-                name: "Premier League"
-                page:"PremierMenuPage"
-                imgSource:"../img/barclays_logo.png"
+                name: "Ladder"
+                page:"LadderPage"
             }
+
             ListElement {
-                name: "Bundesliga"
-                page:"BundesMenuPage"
-                imgSource:"../img/bundesliga_logo.png"
+                name: "Upcoming games"
+                page:"UpcomingPage"
             }
+
             ListElement {
-                name: "La Liga"
-                page:"LaligaMenuPage"
-                imgSource:"../img/laliga_logo.png"
+                name: "Past games"
+                page:"PastPage"
             }
        }
        delegate: BackgroundItem {
            width: ListView.view.width
            //height: Theme.itemSizeSmall
            Row{
-               Column
-               {
-                   Rectangle{
-                       color :"transparent"
-                       clip: true
-                       x: 0
-                       y: 0
-                       width: 195/2
-                       height: 195/2
-                       Image {
-                           width: 150/2
-                           height: 150/2
-                           source: imgSource
-                       }
-                   }
-               }
                x: Theme.paddingLarge
-               Column {
-                   Text
-                   {
-                       text : name
-                       font.pixelSize: Theme.fontSizeMedium
-                       color: Theme.primaryColor
-                   }
-                   Text
-                   {
-                       text : "Ladder"
-                       font.pixelSize: Theme.fontSizeSmall
-                       color: Theme.primaryColor
-                   }
-                }
-            }
-           onClicked: pageStack.push(Qt.resolvedUrl(page+".qml"))
+               Label {text: name }
+           }
+           onClicked: pageStack.push(Qt.resolvedUrl("Bundes"+page+".qml"))
        }
        VerticalScrollDecorator { flickable: listView }
+    }
+
+    Label{
+        x: Theme.paddingLarge
+        y: 500
+        color: Theme.secondaryColor
+        text: "Next game at "+bundesUpcoming.next20games[0][0]
+    }
+    Label{
+        x: Theme.paddingLarge
+        font.pixelSize: Theme.fontSizeSmall
+        y: 540
+        color: Theme.secondaryColor
+        text: bundesUpcoming.next20games[0][1] +" vs "+ bundesUpcoming.next20games[0][2]
+    }
+
+    Label{
+        x: Theme.paddingLarge
+        y: 600
+        color: Theme.secondaryColor
+        text: "Previous game at "+bundesligaModel.parseData[0][1]
+    }
+    Label{
+        x: Theme.paddingLarge
+        font.pixelSize: Theme.fontSizeSmall
+        y: 640
+        color: Theme.secondaryColor
+        text: bundesligaModel.parseData[0][2] +" vs "+ bundesligaModel.parseData[0][3]
     }
 }
